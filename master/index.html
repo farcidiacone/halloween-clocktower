@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#151315">
+  <meta name="robots" content="noindex">
+  <meta name="description" content="Mesa del máster de Trouble Brewing: jugadores y orden de la primera noche y las demás noches.">
+  <title>Mesa del máster · Trouble Brewing</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext x='8' y='48' font-size='46'%3E%E2%9C%A6%3C/text%3E%3C/svg%3E">
+  <style>
+    :root { color-scheme:dark; --bg:#151315; --panel:#211e21; --line:#393135; --ink:#f3eade; --muted:#beb3a8; --gold:#e6b87b; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.6 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; -webkit-text-size-adjust:100%; }
+    [hidden] { display:none !important; }
+    button,input { font:inherit; }
+    button,a,input { -webkit-tap-highlight-color:transparent; }
+    button { cursor:pointer; }
+    button:focus-visible,a:focus-visible,input:focus-visible { outline:3px solid var(--gold); outline-offset:3px; }
+    button { min-height:44px; padding:9px 14px; border:1px solid var(--line); border-radius:8px; background:var(--panel); color:var(--ink); }
+    a { color:var(--gold); text-underline-offset:4px; }
+    h1,h2,h3,p { margin:0; }
+    h1,h2,h3 { font-family:Georgia,"Times New Roman",serif; font-weight:normal; }
+    h1 { font-size:clamp(28px,5vw,38px); line-height:1.2; letter-spacing:-.03em; }
+    h2 { font-size:28px; line-height:1.2; }
+    .wrap { width:min(calc(100% - 36px),960px); margin-inline:auto; }
+    .eyebrow { color:var(--gold); font-size:10px; font-weight:700; letter-spacing:.2em; text-transform:uppercase; }
+    .muted { color:var(--muted); font-size:14px; }
+    .primary { background:var(--gold); border-color:var(--gold); color:#251b15; font-weight:650; }
+    .gate { min-height:100svh; display:grid; align-content:center; text-align:center; padding-block:40px; }
+    .gate-symbol { color:var(--gold); font:50px Georgia,serif; margin-bottom:18px; }
+    .gate h1 { margin:12px 0 15px; }
+    .gate p { max-width:360px; margin-inline:auto; }
+    .gate .primary { display:block; margin:26px auto 20px; min-width:210px; }
+    .gate a { font-size:14px; }
+    .gate .muted:last-child { margin-top:26px; font-size:12px; }
+    .masthead { padding:24px 0 20px; background:radial-gradient(ellipse at 20% 0%,#743a2544,transparent 80%); }
+    .masthead-row { display:flex; justify-content:space-between; align-items:center; gap:14px; }
+    .masthead h1 { margin-top:6px; }
+    .masthead a { display:inline-block; margin-top:12px; font-size:13px; }
+    .privacy-dock { position:fixed; inset-inline:0; bottom:0; z-index:3; padding:10px 0 calc(10px + env(safe-area-inset-bottom)); background:var(--bg); border-top:1px solid var(--line); }
+    .privacy-dock .wrap { display:flex; justify-content:space-between; align-items:center; gap:12px; }
+    .privacy-dock span { color:var(--muted); font-size:12px; }
+    .conceal-button { background:var(--gold); color:#251b15; border-color:var(--gold); font-size:14px; }
+    .navigation { position:sticky; top:0; z-index:2; background:#151315fa; border-block:1px solid var(--line); padding:12px 0; }
+    .tabs { display:flex; gap:7px; }
+    .tabs button { flex:1; background:transparent; font-size:14px; padding-inline:10px; }
+    .tabs button[aria-pressed="true"] { background:var(--gold); border-color:var(--gold); color:#251b15; font-weight:650; }
+    main { padding:24px 0 calc(100px + env(safe-area-inset-bottom)); }
+    .intro { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:12px; margin-bottom:12px; }
+    .count { padding:4px 10px; background:#30271f; border:1px solid #574739; border-radius:5px; color:var(--gold); font-size:13px; }
+    .explanation { max-width:620px; margin-bottom:20px; }
+    .storage { margin:14px 0 20px; color:var(--muted); font-size:12px; min-height:20px; }
+    .storage.warning { color:#f0ac88; }
+    .search-label { display:block; margin:22px 0; }
+    .search-label span { display:block; margin-bottom:7px; color:var(--muted); font-size:13px; }
+    input[type="search"],input[type="text"] { width:100%; min-width:0; min-height:48px; padding:10px 12px; border:1px solid #57474b; border-radius:7px; background:var(--bg); color:var(--ink); font-size:16px; }
+    input::placeholder { color:#998e88; opacity:1; }
+    .role-group { margin-top:28px; --accent:#8dbbdf; }
+    .role-group[data-team="outsider"] { --accent:#a6b7ed; }
+    .role-group[data-team="minion"] { --accent:#f0ac88; }
+    .role-group[data-team="demon"] { --accent:#ee9aa9; }
+    .role-group h3 { color:var(--accent); font-size:23px; border-bottom:1px solid var(--line); padding-bottom:10px; margin-bottom:12px; }
+    .roster { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+    .assignment { display:block; min-width:0; padding:14px; background:var(--panel); border:1px solid var(--line); border-radius:9px; }
+    .assignment span { display:block; margin-bottom:8px; font-size:15px; color:var(--accent); }
+    .empty { padding:25px 0; text-align:center; color:var(--muted); }
+    .reset-area { margin-top:32px; padding-top:20px; border-top:1px solid var(--line); }
+    .reset-area p { margin-top:8px; font-size:12px; color:var(--muted); }
+    .danger { color:#ee9aa9; }
+    .night-tools { display:flex; flex-wrap:wrap; justify-content:space-between; gap:10px; align-items:center; margin:20px 0 10px; }
+    .toggle { display:flex; align-items:center; gap:9px; min-height:44px; font-size:14px; cursor:pointer; }
+    input[type="checkbox"] { width:22px; height:22px; flex-shrink:0; accent-color:var(--gold); }
+    .progress { margin-bottom:16px; color:var(--muted); font-size:13px; }
+    .steps { display:grid; gap:10px; padding:0; margin:0; list-style:none; counter-reset:night; }
+    .step { padding:16px; border:1px solid var(--line); border-radius:9px; background:var(--panel); }
+    .step.done { background:#1c211e; border-color:#3e5243; }
+    .step-label { display:flex; align-items:center; gap:12px; min-height:44px; cursor:pointer; }
+    .step-heading { flex:1; min-width:0; }
+    .step-title { display:block; font:22px/1.2 Georgia,serif; }
+    .step-order { display:block; margin-bottom:4px; font-size:10px; letter-spacing:.12em; color:var(--muted); text-transform:uppercase; }
+    .player-name { display:block; margin-top:8px; color:var(--gold); font-weight:650; font-size:16px; overflow-wrap:anywhere; white-space:pre-wrap; }
+    .player-name.unassigned { color:var(--muted); font-size:13px; font-weight:normal; }
+    .step-description { margin-top:12px; font-size:14px; color:#d3c8bc; }
+    .step.done .step-order { color:#b5c9b6; }
+    .night-note { margin:22px 0 0; padding:14px 16px; border:1px solid #574739; border-radius:8px; color:#e0c9ac; font-size:13px; background:#251f1c; }
+    dialog { max-width:min(420px,calc(100% - 32px)); padding:24px; color:var(--ink); background:var(--panel); border:1px solid var(--line); border-radius:12px; }
+    dialog::backdrop { background:#000b; }
+    dialog p { margin:12px 0 20px; color:var(--muted); font-size:14px; }
+    .dialog-actions { display:flex; flex-wrap:wrap; justify-content:flex-end; gap:10px; }
+    noscript p { padding:24px; text-align:center; }
+    @media(max-width:620px) { .roster { grid-template-columns:1fr; } .tabs button { font-size:12px; padding-inline:7px; } .masthead { padding-top:20px; } }
+    @media print { #app { display:none !important; } }
+  </style>
+</head>
+<body>
+  <section class="gate wrap" id="gate" aria-labelledby="gate-title">
+    <div class="gate-symbol" aria-hidden="true">✦</div>
+    <p class="eyebrow">Trouble Brewing</p>
+    <h1 id="gate-title">Mesa del máster</h1>
+    <p class="muted">Los jugadores y el orden de la noche, en un solo lugar.</p>
+    <button class="primary" id="open" type="button" hidden>Abrir mesa</button>
+    <a href="../">← Guía de personajes</a>
+    <p class="muted">Abrila cuando puedas mirar tu celular en privado.</p>
+  </section>
+  <div id="app" hidden>
+    <header class="masthead">
+      <div class="wrap">
+        <div class="masthead-row">
+          <div><p class="eyebrow">Trouble Brewing · Narrador</p><h1>Mesa del máster</h1></div>
+        </div>
+        <a href="../">← Guía de personajes</a>
+      </div>
+    </header>
+    <nav class="navigation" aria-label="Vistas de la mesa">
+      <div class="wrap tabs">
+        <button type="button" data-view="players" aria-pressed="true" aria-controls="players">Jugadores</button>
+        <button type="button" data-view="first" aria-pressed="false" aria-controls="night">Primera noche</button>
+        <button type="button" data-view="other" aria-pressed="false" aria-controls="night">Otras noches</button>
+      </div>
+    </nav>
+    <main class="wrap">
+      <p class="storage" id="storage-status" role="status">Registro manual, guardado solo en este navegador.</p>
+      <section id="players" aria-labelledby="players-title">
+        <div class="intro"><h2 id="players-title" tabindex="-1">Quién es quién</h2><span class="count" id="player-count"></span></div>
+        <p class="muted explanation">Cuando cada jugador te muestre su personaje, anotá su nombre acá. Lo vas a ver junto a su turno de noche. Dejá vacíos los personajes que no están en juego.</p>
+        <label class="search-label"><span>Buscar personaje o jugador</span><input id="roster-search" type="search" placeholder="Ej.: Empath o Lucía" autocomplete="off" spellcheck="false"></label>
+        <div id="roster-groups"></div>
+        <p class="empty" id="roster-empty" hidden>No encontramos personajes ni jugadores con esa búsqueda.</p>
+        <div class="reset-area"><button class="danger" id="new-game" type="button">Nueva partida</button><p>Borra los nombres y las marcas de ambas noches, previa confirmación.</p></div>
+      </section>
+      <section id="night" aria-labelledby="night-title" hidden>
+        <div class="intro"><h2 id="night-title" tabindex="-1">Primera noche</h2><span class="count" id="night-count"></span></div>
+        <p class="muted">Seguí el orden de arriba hacia abajo y marcá cada paso al terminar.</p>
+        <div class="night-tools">
+          <label class="toggle"><input id="assigned-only" type="checkbox">Solo personajes asignados</label>
+          <button id="reset-night" type="button">Reiniciar pasos</button>
+        </div>
+        <p class="progress" id="progress" role="status"></p>
+        <ol class="steps" id="steps"></ol>
+        <p class="night-note">Orden de las hojas de Trouble Brewing que usás en la mesa. Los pasos con condiciones se hacen solo cuando corresponde. La lista conserva los personajes aunque hayan muerto; el máster decide a quién despertar.</p>
+      </section>
+    </main>
+    <aside class="privacy-dock" aria-label="Privacidad de la mesa"><div class="wrap"><span>Mesa privada</span><button class="conceal-button" id="conceal" type="button">Ocultar mesa</button></div></aside>
+  </div>
+  <dialog id="reset-dialog" aria-labelledby="reset-title" aria-describedby="reset-description">
+    <h2 id="reset-title">¿Empezar otra partida?</h2>
+    <p id="reset-description">Se van a borrar todos los nombres y los pasos completados en este navegador.</p>
+    <div class="dialog-actions"><button id="cancel-reset" type="button" autofocus>Cancelar</button><button class="danger" id="confirm-reset" type="button">Borrar y empezar</button></div>
+  </dialog>
+  <noscript><p>Activá JavaScript para asignar jugadores y usar el orden de la noche.</p></noscript>
+  <script>
+    const roles = [
+      ['Washerwoman','townsfolk'],['Librarian','townsfolk'],['Investigator','townsfolk'],['Chef','townsfolk'],['Empath','townsfolk'],['Fortune Teller','townsfolk'],['Undertaker','townsfolk'],['Monk','townsfolk'],['Ravenkeeper','townsfolk'],['Virgin','townsfolk'],['Slayer','townsfolk'],['Soldier','townsfolk'],['Mayor','townsfolk'],
+      ['Butler','outsider'],['Drunk','outsider'],['Recluse','outsider'],['Saint','outsider'],['Poisoner','minion'],['Spy','minion'],['Baron','minion'],['Scarlet Woman','minion'],['Imp','demon']
+    ];
+    const dusk = ['dusk','Anochecer','Comprobá que todos tengan los ojos cerrados. Actúan los Viajeros y Fábulas que correspondan.'];
+    const poisoner = ['Poisoner','Poisoner','El Poisoner elige a un jugador para envenenarlo.'];
+    const spy = ['Spy','Spy','Mostrale el Grimorio durante el tiempo que necesite.'];
+    const empath = ['Empath','Empath','Mostrá con los dedos cuántos de sus dos vecinos vivos son malvados.'];
+    const fortune = ['Fortune Teller','Fortune Teller','Elige a dos jugadores. Asentí si alguno es el Demonio o el jugador marcado como señuelo (RED HERRING); si no, negá con la cabeza.'];
+    const butler = ['Butler','Butler','El Butler elige a un jugador como amo.'];
+    const orders = {
+      first:[
+        dusk,
+        ['minion-info','Información de los Esbirros','Con 7 o más jugadores, despertá a todos los Esbirros. Mostrá la ficha «Este es el Demonio» y señalá al Demonio.'],
+        ['demon-info','Información del Demonio','Con 7 o más jugadores, despertá al Demonio. Mostrá «Estos son tus Esbirros» y señalalos. Después mostrá «Estos personajes no están en juego» y tres personajes buenos fuera de la partida como coartadas.'],
+        poisoner,spy,
+        ['Washerwoman','Washerwoman','Mostrá la ficha del Aldeano que conocerá. Señalá al jugador marcado como TOWNSFOLK y al marcado como WRONG.'],
+        ['Librarian','Librarian','Mostrá la ficha del Forastero que conocerá. Señalá al jugador marcado como OUTSIDER y al marcado como WRONG. Si no hay Forasteros, indicá cero.'],
+        ['Investigator','Investigator','Mostrá la ficha del Esbirro que conocerá. Señalá al jugador marcado como MINION y al marcado como WRONG.'],
+        ['Chef','Chef','Mostrá con los dedos cuántos pares de jugadores malvados están sentados uno al lado del otro.'],
+        empath,fortune,butler,
+        ['dawn','Amanecer','Esperá unos segundos y pedí que todos abran los ojos.']
+      ],
+      other:[
+        dusk,poisoner,
+        ['Monk','Monk','El Monk elige a un jugador que no sea él para protegerlo del Demonio esta noche.'],
+        spy,
+        ['Scarlet Woman','Scarlet Woman','Si hoy se convirtió en el Imp, mostrá la ficha «Vos sos» (YOU ARE) y después la del Imp.'],
+        ['Imp','Imp','El Imp elige a un jugador. Si se elige a sí mismo, reemplazá la ficha de un Esbirro vivo por una ficha de Imp. Dormí al Imp anterior, despertá al nuevo y mostrá «Vos sos» (YOU ARE), seguido de la ficha del Imp.'],
+        ['Ravenkeeper','Ravenkeeper','Si murió esta noche, elige a un jugador. Mostrale la ficha del personaje de ese jugador.'],
+        ['Undertaker','Undertaker','Si hubo una ejecución hoy, mostrá la ficha del personaje del jugador ejecutado.'],
+        empath,fortune,butler,
+        ['dawn','Amanecer','Esperá unos segundos. Pedí que todos abran los ojos y anunciá inmediatamente quién murió.']
+      ]
+    };
+    const key = 'clocktower.master.v1';
+    const emptyState = () => ({names:{},done:{first:[],other:[]},assignedOnly:false,view:'players'});
+    const normalize = value => value.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+    let state = emptyState();
+    let storageAvailable = true;
+    let loadFailed = false;
+    try {
+      const raw = localStorage.getItem(key);
+      if (raw) {
+        const stored = JSON.parse(raw);
+        if (!stored || typeof stored !== 'object') throw new Error('Invalid saved game');
+        for (const [role] of roles) if (typeof stored.names?.[role] === 'string') state.names[role] = stored.names[role].slice(0,60);
+        for (const night of ['first','other']) if (Array.isArray(stored.done?.[night])) state.done[night] = [...new Set(stored.done[night].filter(id => orders[night].some(step => step[0] === id)))];
+        state.assignedOnly = stored.assignedOnly === true;
+        if (['players','first','other'].includes(stored.view)) state.view = stored.view;
+      }
+    } catch { loadFailed = true; }
+    const $ = selector => document.querySelector(selector);
+    const make = (tag,className,text) => {
+      const element = document.createElement(tag);
+      if (className) element.className = className;
+      if (text !== undefined) element.textContent = text;
+      return element;
+    };
+    function save() {
+      try { localStorage.setItem(key,JSON.stringify(state)); storageAvailable = true; loadFailed = false; }
+      catch { storageAvailable = false; }
+      renderStorageStatus();
+    }
+    function renderStorageStatus() {
+      $('#storage-status').textContent = !storageAvailable ? 'No se pudo guardar en este navegador. Los cambios duran solo mientras esta página siga abierta.' : loadFailed ? 'No se pudo recuperar la partida guardada. Podés empezar a anotar de nuevo.' : 'Registro manual, guardado solo en este navegador.';
+      $('#storage-status').classList.toggle('warning', !storageAvailable || loadFailed);
+    }
+    function assignedCount() { return roles.filter(([role]) => state.names[role]?.trim()).length; }
+    function renderCounts() {
+      const count = assignedCount();
+      const label = `${count} ${count === 1 ? 'personaje asignado' : 'personajes asignados'}`;
+      $('#player-count').textContent = label;
+      $('#night-count').textContent = label;
+    }
+    function filterRoster() {
+      const query = normalize($('#roster-search').value.trim());
+      let visible = 0;
+      document.querySelectorAll('.assignment').forEach(label => {
+        const role = label.dataset.role;
+        label.hidden = !normalize(`${role} ${state.names[role] || ''}`).includes(query);
+        if (!label.hidden) visible++;
+      });
+      document.querySelectorAll('.role-group').forEach(group => { group.hidden = !group.querySelector('.assignment:not([hidden])'); });
+      $('#roster-empty').hidden = visible !== 0;
+    }
+    function buildRoster() {
+      const groups = {townsfolk:'Aldeanos',outsider:'Forasteros',minion:'Esbirros',demon:'Demonio'};
+      for (const [team,title] of Object.entries(groups)) {
+        const section = make('section','role-group');
+        section.dataset.team = team;
+        section.append(make('h3','',title));
+        const grid = make('div','roster');
+        for (const [role] of roles.filter(([,type]) => type === team)) {
+          const label = make('label','assignment');
+          label.dataset.role = role;
+          const input = document.createElement('input');
+          input.type = 'text';
+          input.autocomplete = 'off';
+          input.spellcheck = false;
+          input.maxLength = 60;
+          input.placeholder = 'Nombre del jugador';
+          input.value = state.names[role] || '';
+          input.setAttribute('aria-label',`Jugador de ${role}`);
+          input.addEventListener('input',() => {
+            if (input.value.trim()) state.names[role] = input.value;
+            else delete state.names[role];
+            save();
+            renderCounts();
+          });
+          label.append(make('span','',role),input);
+          grid.append(label);
+        }
+        section.append(grid);
+        $('#roster-groups').append(section);
+      }
+    }
+    function playerLabel(id) {
+      if (id === 'minion-info') return roles.filter(([,team]) => team === 'minion').filter(([role]) => state.names[role]?.trim()).map(([role]) => `${state.names[role].trim()} · ${role}`).join(' / ') || 'Esbirros sin asignar';
+      if (id === 'demon-info') return state.names.Imp?.trim() || 'Demonio sin asignar';
+      return state.names[id]?.trim() || 'Sin asignar';
+    }
+    function renderProgress() {
+      const visible = [...$('#steps').children];
+      const count = visible.filter(step => state.done[state.view].includes(step.dataset.id)).length;
+      $('#progress').textContent = `${count} de ${visible.length} pasos completados`;
+    }
+    function renderNight() {
+      if (state.view === 'players') return;
+      $('#night-title').textContent = state.view === 'first' ? 'Primera noche' : 'Otras noches';
+      $('#reset-night').textContent = state.view === 'first' ? 'Reiniciar pasos' : 'Empezar otra noche';
+      $('#assigned-only').checked = state.assignedOnly;
+      $('#steps').replaceChildren();
+      orders[state.view].forEach(([id,title,description],index) => {
+        const isRole = roles.some(([role]) => role === id);
+        if (state.assignedOnly && isRole && !state.names[id]?.trim()) return;
+        const item = make('li','step');
+        item.dataset.id = id;
+        const completed = state.done[state.view].includes(id);
+        item.classList.toggle('done',completed);
+        const label = make('label','step-label');
+        const input = document.createElement('input');
+        input.type = 'checkbox';
+        input.checked = completed;
+        input.setAttribute('aria-label',`Completar ${title}`);
+        const heading = make('span','step-heading');
+        heading.append(make('span','step-order',`Paso ${index + 1}${completed ? ' · Hecho' : ''}`),make('span','step-title',title));
+        if (isRole || id === 'minion-info' || id === 'demon-info') {
+          const assigned = isRole ? Boolean(state.names[id]?.trim()) : id === 'demon-info' ? Boolean(state.names.Imp?.trim()) : roles.some(([role,team]) => team === 'minion' && state.names[role]?.trim());
+          heading.append(make('span',`player-name${assigned ? '' : ' unassigned'}`,playerLabel(id)));
+        }
+        label.append(input,heading);
+        item.append(label,make('p','step-description',description));
+        input.addEventListener('change',() => {
+          state.done[state.view] = state.done[state.view].filter(value => value !== id);
+          if (input.checked) state.done[state.view].push(id);
+          item.classList.toggle('done',input.checked);
+          item.querySelector('.step-order').textContent = `Paso ${index + 1}${input.checked ? ' · Hecho' : ''}`;
+          save();
+          renderProgress();
+        });
+        $('#steps').append(item);
+      });
+      renderProgress();
+    }
+    function showView(view,focus = false) {
+      state.view = view;
+      $('#players').hidden = view !== 'players';
+      $('#night').hidden = view === 'players';
+      document.querySelectorAll('[data-view]').forEach(button => button.setAttribute('aria-pressed',String(button.dataset.view === view)));
+      renderCounts();
+      renderNight();
+      if (focus) {
+        window.scrollTo({top:0,behavior:'instant'});
+        $(view === 'players' ? '#players-title' : '#night-title').focus({preventScroll:true});
+      }
+    }
+    function conceal() {
+      if ($('#reset-dialog').open) $('#reset-dialog').close();
+      $('#app').hidden = true;
+      $('#gate').hidden = false;
+    }
+    $('#open').addEventListener('click',() => {
+      $('#gate').hidden = true;
+      $('#app').hidden = false;
+      showView(state.view,true);
+    });
+    $('#conceal').addEventListener('click',() => { conceal(); $('#open').focus(); });
+    document.querySelectorAll('[data-view]').forEach(button => button.addEventListener('click',() => { showView(button.dataset.view,true); save(); }));
+    $('#roster-search').addEventListener('input',filterRoster);
+    $('#assigned-only').addEventListener('change',event => { state.assignedOnly = event.target.checked; save(); renderNight(); });
+    $('#reset-night').addEventListener('click',() => { state.done[state.view] = []; save(); renderNight(); });
+    $('#new-game').addEventListener('click',() => $('#reset-dialog').showModal());
+    $('#cancel-reset').addEventListener('click',() => $('#reset-dialog').close());
+    $('#confirm-reset').addEventListener('click',() => {
+      state = emptyState();
+      save();
+      $('#reset-dialog').close();
+      $('#roster-search').value = '';
+      document.querySelectorAll('.assignment input').forEach(input => { input.value = ''; });
+      filterRoster();
+      showView('players',true);
+    });
+    document.addEventListener('keydown',event => { if (event.key === 'Escape' && !$('#reset-dialog').open) { conceal(); $('#open').focus(); } });
+    document.addEventListener('visibilitychange',() => { if (document.hidden) conceal(); });
+    ['blur','pagehide','pageshow','beforeprint'].forEach(type => window.addEventListener(type,conceal));
+    buildRoster();
+    renderCounts();
+    renderStorageStatus();
+    $('#open').hidden = false;
+  </script>
+</body>
+</html>
