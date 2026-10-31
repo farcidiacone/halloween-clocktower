@@ -17,10 +17,10 @@
     button:focus-visible,a:focus-visible,input:focus-visible,summary:focus-visible { outline:3px solid var(--gold); outline-offset:4px; }
     [hidden] { display:none !important; }
     .wrap { width:min(100% - 36px,960px); margin-inline:auto; }
-    .hero { padding:36px 0 26px; background:radial-gradient(ellipse at 50% 0%,#49302b66,transparent 75%); text-align:center; }
+    .hero { padding:26px 0 22px; background:radial-gradient(ellipse at 50% 0%,#743a2566,transparent 78%); text-align:center; }
     .brand { display:flex; justify-content:center; align-items:center; gap:10px; color:var(--gold); font-size:10px; font-weight:700; letter-spacing:.19em; text-transform:uppercase; }
     .brand svg { width:25px; height:32px; flex-shrink:0; }
-    .eyebrow { margin:22px 0 5px; color:var(--muted); text-transform:uppercase; font-size:10px; letter-spacing:.24em; }
+    .eyebrow { margin:18px 0 7px; color:var(--gold); text-transform:uppercase; font-size:11px; letter-spacing:.2em; }
     h1 { margin:0; font:normal clamp(38px,8vw,62px)/1.12 Georgia,"Times New Roman",serif; letter-spacing:-.045em; }
     h1 span { color:var(--gold); }
     .subtitle { margin:14px 0 0; font-size:14px; color:var(--muted); }
@@ -63,9 +63,7 @@
     dl { margin:10px 0 0; font-size:14px; }
     dt { font-weight:650; margin-top:10px; }
     dd { margin:2px 0 0; color:#cfbfae; }
-    footer { padding:0 0 max(30px,env(safe-area-inset-bottom)); text-align:center; color:var(--muted); font-size:11px; }
-    footer p { margin:5px 0; }
-    footer a { color:var(--gold); text-underline-offset:3px; }
+    main { padding-bottom:max(16px,env(safe-area-inset-bottom)); }
     @media(max-width:620px) { .cards { grid-template-columns:1fr; } .hero { padding-top:27px; } .card { padding:18px; } .group { margin-top:25px; } }
     @media(max-width:360px) { .wrap { width:calc(100% - 28px); } .filter { padding-inline:10px; font-size:12px; } }
     @media(prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } }
@@ -76,9 +74,9 @@
   <header class="hero">
     <div class="wrap">
       <div class="brand"><svg viewBox="0 0 30 40" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M4 38h22M7 38V17h16v21M5 17 15 2l10 15ZM12 3h6M12 33v5h6v-5"/><circle cx="15" cy="23" r="5"/><path d="M15 19v4l3 2"/></svg>Blood on the Clocktower</div>
-      <p class="eyebrow">Tu guía durante la partida</p>
+      <p class="eyebrow">Noche de Halloween</p>
       <h1>Trouble <span>Brewing</span></h1>
-      <p class="subtitle">22 personajes. Un pueblo. Muchas sospechas.</p>
+      <p class="subtitle">Buscá tu personaje. Desconfiá de tus amigos.</p>
       <div class="ornament" aria-hidden="true">✦</div>
     </div>
   </header>
@@ -95,7 +93,7 @@
     </div>
   </div>
   <main class="wrap" id="characters">
-    <p class="status" id="status" role="status" aria-live="polite" aria-atomic="true">22 personajes · Nombres originales, habilidades en español</p>
+    <p class="status" id="status" role="status" aria-live="polite" aria-atomic="true">22 personajes en el pueblo</p>
     <section class="group" data-type="townsfolk" aria-labelledby="townsfolk-title">
       <div class="group-heading"><div><h2 id="townsfolk-title">Aldeanos</h2><span class="team">Townsfolk · Equipo del bien</span></div><span class="total" aria-label="13 personajes">13</span></div>
       <div class="cards">
@@ -149,7 +147,6 @@
       </dl></details>
     </aside>
   </main>
-  <footer class="wrap"><p>Una guía para tener a mano. Y desconfiar de todos.</p><p>Traducción no oficial de la hoja Trouble Brewing.</p><p>Blood on the Clocktower · The Pandemonium Institute</p><p><a href="#">Volver arriba ↑</a></p></footer>
   <script>
     const search = document.querySelector('#search');
     const filters = [...document.querySelectorAll('[data-filter]')];
@@ -175,7 +172,7 @@
       filters.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.filter === active)));
       clear.hidden = search.value.length === 0;
       document.querySelector('#empty').hidden = count > 0;
-      document.querySelector('#status').textContent = `${count} ${count === 1 ? 'personaje' : 'personajes'}${count === 22 ? ' · Nombres originales, habilidades en español' : ' de 22'}`;
+      document.querySelector('#status').textContent = `${count} ${count === 1 ? 'personaje' : 'personajes'}${count === 22 ? ' en el pueblo' : ' de 22'}`;
     }
     search.addEventListener('input', update);
     clear.addEventListener('click', () => { search.value = ''; update(); search.focus(); });
