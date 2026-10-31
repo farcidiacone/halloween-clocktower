@@ -154,31 +154,31 @@
       ['Washerwoman','townsfolk'],['Librarian','townsfolk'],['Investigator','townsfolk'],['Chef','townsfolk'],['Empath','townsfolk'],['Fortune Teller','townsfolk'],['Undertaker','townsfolk'],['Monk','townsfolk'],['Ravenkeeper','townsfolk'],['Virgin','townsfolk'],['Slayer','townsfolk'],['Soldier','townsfolk'],['Mayor','townsfolk'],
       ['Butler','outsider'],['Drunk','outsider'],['Recluse','outsider'],['Saint','outsider'],['Poisoner','minion'],['Spy','minion'],['Baron','minion'],['Scarlet Woman','minion'],['Imp','demon']
     ];
-    const dusk = ['dusk','Anochecer','Comprobá que todos tengan los ojos cerrados. Actúan los Viajeros y Fábulas que correspondan.'];
+    const dusk = ['dusk','Anochecer','Comprobá que todos tengan los ojos cerrados. Actúan los Travellers y Fabled que correspondan.'];
     const poisoner = ['Poisoner','Poisoner','El Poisoner elige a un jugador para envenenarlo.'];
-    const spy = ['Spy','Spy','Mostrale el Grimorio durante el tiempo que necesite.'];
+    const spy = ['Spy','Spy','Mostrale el Grimoire durante el tiempo que necesite.'];
     const empath = ['Empath','Empath','Mostrá con los dedos cuántos de sus dos vecinos vivos son malvados.'];
-    const fortune = ['Fortune Teller','Fortune Teller','Elige a dos jugadores. Asentí si alguno es el Demonio o el jugador marcado como señuelo (RED HERRING); si no, negá con la cabeza.'];
+    const fortune = ['Fortune Teller','Fortune Teller','Elige a dos jugadores. Asentí si alguno es el Demon o el jugador marcado como señuelo (RED HERRING); si no, negá con la cabeza.'];
     const butler = ['Butler','Butler','El Butler elige a un jugador como amo.'];
     const orders = {
       first:[
         dusk,
-        ['minion-info','Información de los Esbirros','Con 7 o más jugadores, despertá a todos los Esbirros. Mostrá la ficha «Este es el Demonio» y señalá al Demonio.'],
-        ['demon-info','Información del Demonio','Con 7 o más jugadores, despertá al Demonio. Mostrá «Estos son tus Esbirros» y señalalos. Después mostrá «Estos personajes no están en juego» y tres personajes buenos fuera de la partida como coartadas.'],
+        ['minion-info','Información de los Minions','Con 7 o más jugadores, despertá a todos los Minions. Mostrá la ficha «Este es el Demon» y señalá al Demon.'],
+        ['demon-info','Información del Demon','Con 7 o más jugadores, despertá al Demon. Mostrá «Estos son tus Minions» y señalalos. Después mostrá «Estos personajes no están en juego» y tres personajes buenos fuera de la partida como coartadas.'],
         poisoner,spy,
-        ['Washerwoman','Washerwoman','Mostrá la ficha del Aldeano que conocerá. Señalá al jugador marcado como TOWNSFOLK y al marcado como WRONG.'],
-        ['Librarian','Librarian','Mostrá la ficha del Forastero que conocerá. Señalá al jugador marcado como OUTSIDER y al marcado como WRONG. Si no hay Forasteros, indicá cero.'],
-        ['Investigator','Investigator','Mostrá la ficha del Esbirro que conocerá. Señalá al jugador marcado como MINION y al marcado como WRONG.'],
+        ['Washerwoman','Washerwoman','Mostrá la ficha del Townsfolk que conocerá. Señalá al jugador marcado como TOWNSFOLK y al marcado como WRONG.'],
+        ['Librarian','Librarian','Mostrá la ficha del Outsider que conocerá. Señalá al jugador marcado como OUTSIDER y al marcado como WRONG. Si no hay Outsiders, indicá cero.'],
+        ['Investigator','Investigator','Mostrá la ficha del Minion que conocerá. Señalá al jugador marcado como MINION y al marcado como WRONG.'],
         ['Chef','Chef','Mostrá con los dedos cuántos pares de jugadores malvados están sentados uno al lado del otro.'],
         empath,fortune,butler,
         ['dawn','Amanecer','Esperá unos segundos y pedí que todos abran los ojos.']
       ],
       other:[
         dusk,poisoner,
-        ['Monk','Monk','El Monk elige a un jugador que no sea él para protegerlo del Demonio esta noche.'],
+        ['Monk','Monk','El Monk elige a un jugador que no sea él para protegerlo del Demon esta noche.'],
         spy,
         ['Scarlet Woman','Scarlet Woman','Si hoy se convirtió en el Imp, mostrá la ficha «Vos sos» (YOU ARE) y después la del Imp.'],
-        ['Imp','Imp','El Imp elige a un jugador. Si se elige a sí mismo, reemplazá la ficha de un Esbirro vivo por una ficha de Imp. Dormí al Imp anterior, despertá al nuevo y mostrá «Vos sos» (YOU ARE), seguido de la ficha del Imp.'],
+        ['Imp','Imp','El Imp elige a un jugador. Si se elige a sí mismo, reemplazá la ficha de un Minion vivo por una ficha de Imp. Dormí al Imp anterior, despertá al nuevo y mostrá «Vos sos» (YOU ARE), seguido de la ficha del Imp.'],
         ['Ravenkeeper','Ravenkeeper','Si murió esta noche, elige a un jugador. Mostrale la ficha del personaje de ese jugador.'],
         ['Undertaker','Undertaker','Si hubo una ejecución hoy, mostrá la ficha del personaje del jugador ejecutado.'],
         empath,fortune,butler,
@@ -237,7 +237,7 @@
       $('#roster-empty').hidden = visible !== 0;
     }
     function buildRoster() {
-      const groups = {townsfolk:'Aldeanos',outsider:'Forasteros',minion:'Esbirros',demon:'Demonio'};
+      const groups = {townsfolk:'Townsfolk',outsider:'Outsiders',minion:'Minions',demon:'Demon'};
       for (const [team,title] of Object.entries(groups)) {
         const section = make('section','role-group');
         section.dataset.team = team;
@@ -268,8 +268,8 @@
       }
     }
     function playerLabel(id) {
-      if (id === 'minion-info') return roles.filter(([,team]) => team === 'minion').filter(([role]) => state.names[role]?.trim()).map(([role]) => `${state.names[role].trim()} · ${role}`).join(' / ') || 'Esbirros sin asignar';
-      if (id === 'demon-info') return state.names.Imp?.trim() || 'Demonio sin asignar';
+      if (id === 'minion-info') return roles.filter(([,team]) => team === 'minion').filter(([role]) => state.names[role]?.trim()).map(([role]) => `${state.names[role].trim()} · ${role}`).join(' / ') || 'Minions sin asignar';
+      if (id === 'demon-info') return state.names.Imp?.trim() || 'Demon sin asignar';
       return state.names[id]?.trim() || 'Sin asignar';
     }
     function renderProgress() {

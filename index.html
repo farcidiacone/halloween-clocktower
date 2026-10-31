@@ -99,55 +99,55 @@
       <label class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="10" cy="10" r="6.5"/><path d="m15 15 6 6"/></svg><input id="search" type="search" placeholder="Buscá un personaje o una habilidad…" aria-label="Buscar por nombre o habilidad" autocomplete="off" spellcheck="false"><button class="clear" id="clear" type="button" aria-label="Borrar búsqueda" hidden>×</button></label>
       <nav class="filters" aria-label="Filtrar por tipo de personaje" hidden>
         <button class="filter" type="button" data-filter="all" aria-pressed="true">Todos</button>
-        <button class="filter" type="button" data-filter="townsfolk" aria-pressed="false">Aldeanos</button>
-        <button class="filter" type="button" data-filter="outsider" aria-pressed="false">Forasteros</button>
-        <button class="filter" type="button" data-filter="minion" aria-pressed="false">Esbirros</button>
-        <button class="filter" type="button" data-filter="demon" aria-pressed="false">Demonio</button>
+        <button class="filter" type="button" data-filter="townsfolk" aria-pressed="false">Townsfolk</button>
+        <button class="filter" type="button" data-filter="outsider" aria-pressed="false">Outsiders</button>
+        <button class="filter" type="button" data-filter="minion" aria-pressed="false">Minions</button>
+        <button class="filter" type="button" data-filter="demon" aria-pressed="false">Demon</button>
       </nav>
     </div>
   </div>
   <main class="wrap" id="characters">
     <p class="status" id="status" role="status" aria-live="polite" aria-atomic="true">22 personajes en el pueblo</p>
     <section class="group" data-type="townsfolk" aria-labelledby="townsfolk-title">
-      <div class="group-heading"><div><h2 id="townsfolk-title">Aldeanos</h2><span class="team">Townsfolk · Equipo del bien</span></div><span class="total" aria-label="13 personajes">13</span></div>
+      <div class="group-heading"><div><h2 id="townsfolk-title">Townsfolk</h2><span class="team">Townsfolk · Equipo del bien</span></div><span class="total" aria-label="13 personajes">13</span></div>
       <div class="cards">
-        <article class="card"><div class="card-top"><span class="sigil" aria-hidden="true">W</span><h3>Washerwoman</h3></div><p>Al comenzar, sabés que <strong>uno de dos jugadores</strong> es un Aldeano específico.</p><span class="timing">Al comenzar</span></article>
-        <article class="card"><div class="card-top"><span class="sigil" aria-hidden="true">L</span><h3>Librarian</h3></div><p>Al comenzar, sabés que <strong>uno de dos jugadores</strong> es un Forastero específico, o que no hay Forasteros en juego.</p><span class="timing">Al comenzar</span></article>
-        <article class="card"><div class="card-top"><span class="sigil" aria-hidden="true">I</span><h3>Investigator</h3></div><p>Al comenzar, sabés que <strong>uno de dos jugadores</strong> es un Esbirro específico.</p><span class="timing">Al comenzar</span></article>
+        <article class="card"><div class="card-top"><span class="sigil" aria-hidden="true">W</span><h3>Washerwoman</h3></div><p>Al comenzar, sabés que <strong>uno de dos jugadores</strong> es un Townsfolk específico.</p><span class="timing">Al comenzar</span></article>
+        <article class="card"><div class="card-top"><span class="sigil" aria-hidden="true">L</span><h3>Librarian</h3></div><p>Al comenzar, sabés que <strong>uno de dos jugadores</strong> es un Outsider específico, o que no hay Outsiders en juego.</p><span class="timing">Al comenzar</span></article>
+        <article class="card"><div class="card-top"><span class="sigil" aria-hidden="true">I</span><h3>Investigator</h3></div><p>Al comenzar, sabés que <strong>uno de dos jugadores</strong> es un Minion específico.</p><span class="timing">Al comenzar</span></article>
         <article class="card"><div class="card-top"><span class="sigil" aria-hidden="true">C</span><h3>Chef</h3></div><p>Al comenzar, sabés cuántos <strong>pares de jugadores malvados sentados uno al lado del otro</strong> hay.</p><span class="timing">Al comenzar</span></article>
         <article class="card"><div class="card-top"><span class="sigil" aria-hidden="true">E</span><h3>Empath</h3></div><p>Cada noche, sabés cuántos de tus <strong>dos vecinos vivos</strong> son malvados.</p><span class="timing">Cada noche</span></article>
-        <article class="card"><div class="card-top"><span class="sigil" aria-hidden="true">F</span><h3>Fortune Teller</h3></div><p>Cada noche, elegí dos jugadores: sabés si <strong>alguno de ellos es un Demonio</strong>. Hay un jugador bueno que aparece como Demonio para vos.</p><span class="timing">Cada noche</span></article>
+        <article class="card"><div class="card-top"><span class="sigil" aria-hidden="true">F</span><h3>Fortune Teller</h3></div><p>Cada noche, elegí dos jugadores: sabés si <strong>alguno de ellos es un Demon</strong>. Hay un jugador bueno que aparece como Demon para vos.</p><span class="timing">Cada noche</span></article>
         <article class="card"><div class="card-top"><span class="sigil" aria-hidden="true">U</span><h3>Undertaker</h3></div><p>Cada noche*, sabés qué personaje tenía el jugador que <strong>murió por ejecución durante ese día</strong>.</p><span class="timing">Cada noche* · Excepto la primera</span></article>
-        <article class="card"><div class="card-top"><span class="sigil" aria-hidden="true">M</span><h3>Monk</h3></div><p>Cada noche*, elegí un jugador que no seas vos: esa noche queda <strong>a salvo del Demonio</strong>.</p><span class="timing">Cada noche* · Excepto la primera</span></article>
+        <article class="card"><div class="card-top"><span class="sigil" aria-hidden="true">M</span><h3>Monk</h3></div><p>Cada noche*, elegí un jugador que no seas vos: esa noche queda <strong>a salvo del Demon</strong>.</p><span class="timing">Cada noche* · Excepto la primera</span></article>
         <article class="card"><div class="card-top"><span class="sigil" aria-hidden="true">R</span><h3>Ravenkeeper</h3></div><p>Si <strong>morís de noche</strong>, te despiertan para elegir un jugador: descubrís qué personaje tiene.</p><span class="timing">Al morir de noche</span></article>
-        <article class="card"><div class="card-top"><span class="sigil" aria-hidden="true">V</span><h3>Virgin</h3></div><p>La <strong>primera vez que te nominan</strong>, si quien te nominó es un Aldeano, esa persona es ejecutada inmediatamente.</p><span class="timing">Primera nominación</span></article>
-        <article class="card"><div class="card-top"><span class="sigil" aria-hidden="true">S</span><h3>Slayer</h3></div><p><strong>Una vez por partida, durante el día</strong>, elegí públicamente un jugador: si es el Demonio, muere.</p><span class="timing">Una vez por partida · De día</span></article>
-        <article class="card"><div class="card-top"><span class="sigil" aria-hidden="true">S</span><h3>Soldier</h3></div><p>Estás <strong>a salvo del Demonio</strong>.</p><span class="timing">Siempre</span></article>
+        <article class="card"><div class="card-top"><span class="sigil" aria-hidden="true">V</span><h3>Virgin</h3></div><p>La <strong>primera vez que te nominan</strong>, si quien te nominó es un Townsfolk, esa persona es ejecutada inmediatamente.</p><span class="timing">Primera nominación</span></article>
+        <article class="card"><div class="card-top"><span class="sigil" aria-hidden="true">S</span><h3>Slayer</h3></div><p><strong>Una vez por partida, durante el día</strong>, elegí públicamente un jugador: si es el Demon, muere.</p><span class="timing">Una vez por partida · De día</span></article>
+        <article class="card"><div class="card-top"><span class="sigil" aria-hidden="true">S</span><h3>Soldier</h3></div><p>Estás <strong>a salvo del Demon</strong>.</p><span class="timing">Siempre</span></article>
         <article class="card"><div class="card-top"><span class="sigil" aria-hidden="true">M</span><h3>Mayor</h3></div><p>Si solo quedan <strong>tres jugadores vivos y no hay ejecución</strong>, tu equipo gana. Si morís de noche, otro jugador podría morir en tu lugar.</p><span class="timing">Final del día / De noche</span></article>
       </div>
     </section>
     <section class="group" data-type="outsider" aria-labelledby="outsider-title">
-      <div class="group-heading"><div><h2 id="outsider-title">Forasteros</h2><span class="team">Outsiders · Equipo del bien</span></div><span class="total" aria-label="4 personajes">4</span></div>
+      <div class="group-heading"><div><h2 id="outsider-title">Outsiders</h2><span class="team">Outsiders · Equipo del bien</span></div><span class="total" aria-label="4 personajes">4</span></div>
       <div class="cards">
         <article class="card"><div class="card-top"><span class="sigil" aria-hidden="true">B</span><h3>Butler</h3></div><p>Cada noche, elegí un jugador que no seas vos: al día siguiente, <strong>solo podés votar si esa persona también está votando</strong>.</p><span class="timing">Cada noche</span></article>
-        <article class="card"><div class="card-top"><span class="sigil" aria-hidden="true">D</span><h3>Drunk</h3></div><p><strong>No sabés que sos el Drunk.</strong> Creés que sos un personaje Aldeano, pero no lo sos.</p><span class="timing">Siempre</span></article>
-        <article class="card"><div class="card-top"><span class="sigil" aria-hidden="true">R</span><h3>Recluse</h3></div><p>Podrías <strong>aparecer como malvado y como un Esbirro o Demonio</strong>, incluso si estás muerto.</p><span class="timing">Incluso después de morir</span></article>
+        <article class="card"><div class="card-top"><span class="sigil" aria-hidden="true">D</span><h3>Drunk</h3></div><p><strong>No sabés que sos el Drunk.</strong> Creés que sos un personaje Townsfolk, pero no lo sos.</p><span class="timing">Siempre</span></article>
+        <article class="card"><div class="card-top"><span class="sigil" aria-hidden="true">R</span><h3>Recluse</h3></div><p>Podrías <strong>aparecer como malvado y como un Minion o Demon</strong>, incluso si estás muerto.</p><span class="timing">Incluso después de morir</span></article>
         <article class="card"><div class="card-top"><span class="sigil" aria-hidden="true">S</span><h3>Saint</h3></div><p>Si <strong>morís por ejecución</strong>, tu equipo pierde.</p><span class="timing">Al morir por ejecución</span></article>
       </div>
     </section>
     <section class="group" data-type="minion" aria-labelledby="minion-title">
-      <div class="group-heading"><div><h2 id="minion-title">Esbirros</h2><span class="team">Minions · Equipo del mal</span></div><span class="total" aria-label="4 personajes">4</span></div>
+      <div class="group-heading"><div><h2 id="minion-title">Minions</h2><span class="team">Minions · Equipo del mal</span></div><span class="total" aria-label="4 personajes">4</span></div>
       <div class="cards">
         <article class="card"><div class="card-top"><span class="sigil" aria-hidden="true">P</span><h3>Poisoner</h3></div><p>Cada noche, elegí un jugador: queda <strong>envenenado esa noche y durante el día siguiente</strong>.</p><span class="timing">Cada noche</span></article>
-        <article class="card"><div class="card-top"><span class="sigil" aria-hidden="true">S</span><h3>Spy</h3></div><p>Cada noche, ves el <strong>Grimorio</strong>. Podrías aparecer como bueno y como un Aldeano o Forastero, incluso si estás muerto.</p><span class="timing">Cada noche</span></article>
-        <article class="card"><div class="card-top"><span class="sigil" aria-hidden="true">B</span><h3>Baron</h3></div><p>Hay <strong>dos Forasteros adicionales</strong> en juego. [+2 Forasteros]</p><span class="timing">Preparación de la partida</span></article>
-        <article class="card"><div class="card-top"><span class="sigil" aria-hidden="true">S</span><h3>Scarlet Woman</h3></div><p>Si hay <strong>cinco o más jugadores vivos</strong> y el Demonio muere, te convertís en el Demonio. Los Viajeros no cuentan.</p><span class="timing">Cuando muere el Demonio</span></article>
+        <article class="card"><div class="card-top"><span class="sigil" aria-hidden="true">S</span><h3>Spy</h3></div><p>Cada noche, ves el <strong>Grimoire</strong>. Podrías aparecer como bueno y como un Townsfolk o Outsider, incluso si estás muerto.</p><span class="timing">Cada noche</span></article>
+        <article class="card"><div class="card-top"><span class="sigil" aria-hidden="true">B</span><h3>Baron</h3></div><p>Hay <strong>dos Outsiders adicionales</strong> en juego. [+2 Outsiders]</p><span class="timing">Preparación de la partida</span></article>
+        <article class="card"><div class="card-top"><span class="sigil" aria-hidden="true">S</span><h3>Scarlet Woman</h3></div><p>Si hay <strong>cinco o más jugadores vivos</strong> y el Demon muere, te convertís en el Demon. Los Travellers no cuentan.</p><span class="timing">Cuando muere el Demon</span></article>
       </div>
     </section>
     <section class="group" data-type="demon" aria-labelledby="demon-title">
-      <div class="group-heading"><div><h2 id="demon-title">Demonio</h2><span class="team">Demon · Equipo del mal</span></div><span class="total" aria-label="1 personaje">1</span></div>
+      <div class="group-heading"><div><h2 id="demon-title">Demon</h2><span class="team">Demon · Equipo del mal</span></div><span class="total" aria-label="1 personaje">1</span></div>
       <div class="cards">
-        <article class="card"><div class="card-top"><span class="sigil" aria-hidden="true">I</span><h3>Imp</h3></div><p>Cada noche*, elegí un jugador: <strong>muere</strong>. Si te matás a vos mismo de esta manera, un Esbirro se convierte en el Imp.</p><span class="timing">Cada noche* · Excepto la primera</span></article>
+        <article class="card"><div class="card-top"><span class="sigil" aria-hidden="true">I</span><h3>Imp</h3></div><p>Cada noche*, elegí un jugador: <strong>muere</strong>. Si te matás a vos mismo de esta manera, un Minion se convierte en el Imp.</p><span class="timing">Cada noche* · Excepto la primera</span></article>
       </div>
     </section>
     <div class="empty" id="empty" hidden><h2>No encontramos personajes</h2><p>Probá otro nombre, habilidad o categoría.</p><button class="reset" type="button" id="reset">Ver todos los personajes</button></div>
@@ -155,7 +155,7 @@
       <p><strong>* Excepto la primera noche.</strong> Las habilidades marcadas con asterisco no se activan esa primera noche.</p>
       <details><summary>Algunos términos para jugar</summary><dl>
         <dt>Aparecer como…</dt><dd>Una habilidad puede detectar a alguien como un personaje o equipo distinto del que realmente tiene.</dd>
-        <dt>Grimorio</dt><dd>El registro del narrador con los personajes y el estado de la partida.</dd>
+        <dt>Grimoire</dt><dd>El registro del narrador con los personajes y el estado de la partida.</dd>
         <dt>Envenenado / Borracho</dt><dd>Tu habilidad no funciona, pero no te avisan. La información que recibís puede ser falsa.</dd>
         <dt>Vecinos vivos</dt><dd>Los jugadores vivos más cercanos a tu izquierda y a tu derecha, saltando a los muertos.</dd>
       </dl></details>
