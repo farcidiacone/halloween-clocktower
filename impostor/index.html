@@ -1,0 +1,1891 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#101a17">
+  <meta name="description" content="Un juego de palabra secreta e impostores para jugar entre amigos con un solo celular.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%23101a17'/%3E%3Cpath d='M12 32Q32 9 52 32Q32 55 12 32Z' fill='none' stroke='%238bd6b1' stroke-width='4'/%3E%3Ccircle cx='32' cy='32' r='7' fill='%238bd6b1'/%3E%3C/svg%3E">
+  <title>El impostor</title>
+  <style>
+    :root{color-scheme:dark;--bg:#101a17;--surface:#192620;--raised:#213229;--ink:#f0f5ef;--muted:#b0c1b5;--line:#354a3e;--accent:#8bd6b1;--accent-ink:#10241a;--danger:#f1b4a8}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.55;-webkit-text-size-adjust:100%}button,input,select,textarea{font:inherit}button,select{cursor:pointer}button{touch-action:manipulation}button:disabled{opacity:.45;cursor:default}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-offset:4px}[hidden]{display:none!important}.app{max-width:38rem;margin:auto;padding:1.25rem 1.1rem max(2rem,env(safe-area-inset-bottom))}.topbar{display:flex;gap:1rem;align-items:center;justify-content:space-between;margin-bottom:2rem}.brand{display:flex;align-items:center;gap:.65rem;font-weight:750;font-size:1.15rem;letter-spacing:-.035em}.brand svg{width:1.7rem;height:1.7rem;color:var(--accent)}.top-actions{display:flex;gap:.7rem;align-items:center}.text-button{background:transparent;color:var(--muted);border:0;min-height:2.75rem;padding:.5rem .1rem;font-size:.78rem;text-decoration:underline;text-underline-offset:.25rem}.help-button{background:transparent;border:1px solid var(--line);color:var(--ink);border-radius:.5rem;padding:.55rem .75rem;min-height:2.75rem;font-size:.8rem}.eyebrow{text-transform:uppercase;letter-spacing:.14em;color:var(--accent);font-size:.67rem;font-weight:750;margin:0 0 .8rem}h1{font-size:clamp(1.9rem,7vw,2.8rem);font-weight:730;line-height:1.15;letter-spacing:-.045em;margin:0 0 1rem;overflow-wrap:anywhere}h2{font-size:1.3rem;line-height:1.25;letter-spacing:-.025em;margin:0 0 .85rem}p{margin:.65rem 0}.intro{font-size:.95rem;color:var(--muted);margin:0 0 1.5rem}.panel{border:1px solid var(--line);border-radius:.9rem;background:var(--surface);padding:1.15rem;margin:1rem 0}.section-heading{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin:1.6rem 0 .8rem}.section-heading h2{margin:0}.counter{font-size:.78rem;color:var(--muted)}.field{display:block;font-size:.85rem;font-weight:600;margin:1rem 0}.field>input,.field>select,.field>textarea{display:block;margin-top:.45rem;width:100%;min-height:3rem;border:1px solid #506356;background:var(--bg);border-radius:.5rem;color:var(--ink);padding:.7rem .8rem;font-size:1rem}.field>textarea{resize:vertical;min-height:5.6rem}.hint{font-size:.78rem;color:var(--muted);font-weight:400;margin:.4rem 0 .9rem}.add-row{display:flex;align-items:center;justify-content:space-between;gap:1rem}.primary,.secondary,.danger-button{width:100%;min-height:3.25rem;padding:.85rem 1rem;border-radius:.6rem;font-size:.95rem;font-weight:680;border:1px solid transparent}.primary{background:var(--accent);color:var(--accent-ink)}.secondary{background:transparent;border-color:#506356;color:var(--ink)}.danger-button{background:#492a25;border-color:#a46b5e;color:#ffded5}.add-row .secondary{width:auto;min-height:2.75rem;padding:.55rem 1rem;font-size:.85rem}.actions{display:grid;gap:.75rem;margin-top:1.3rem}.player-list{display:grid;gap:.6rem;margin:.9rem 0}.player-row{display:grid;grid-template-columns:1.7rem minmax(0,1fr) 2.75rem;gap:.5rem;align-items:center}.player-number{font-size:.78rem;color:var(--muted);text-align:center}.player-input{width:100%;min-width:0;min-height:2.85rem;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:.5rem;padding:.6rem .75rem;font-size:1rem}.remove{width:2.75rem;min-height:2.85rem;border:1px solid var(--line);background:transparent;color:var(--muted);font-size:1.3rem;border-radius:.5rem}.check{display:flex;gap:.75rem;align-items:flex-start;font-size:.9rem;margin:1.25rem 0}.check input{accent-color:var(--accent);width:1.2rem;height:1.2rem;flex-shrink:0;margin:.15rem 0 0}.error{font-size:.85rem;color:var(--danger);margin:1rem 0}.notice{border:1px solid #86723d;background:#302b1b;border-radius:.5rem;padding:.8rem;font-size:.8rem;color:#f3dfad;margin:1rem 0}.stage{display:flex;align-items:center;justify-content:space-between;gap:1rem;color:var(--muted);font-size:.75rem;margin-bottom:1.2rem}.private-card{border:1px solid var(--line);border-radius:1rem;background:var(--surface);padding:1.4rem 1.2rem;text-align:center;min-height:27rem;display:flex;flex-direction:column;align-items:stretch;justify-content:space-between}.private-card h1{font-size:clamp(1.8rem,7vw,2.5rem);margin:.25rem 0 .8rem}.private-body{min-height:14rem;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:.6rem 0}.private-title{font-size:1rem;color:var(--muted);margin:0 0 .6rem;font-weight:500}.private-prefix{font-size:.75rem;color:var(--muted);margin:0 0 .3rem}.private-value{font-size:clamp(1.8rem,7vw,2.6rem);line-height:1.2;letter-spacing:-.035em;font-weight:730;overflow-wrap:anywhere;max-width:100%;margin:.25rem 0}.private-help{font-size:.8rem;color:var(--muted);margin:.6rem 0 1rem}.lock-icon{width:3rem;height:3rem;color:var(--accent);margin:0 auto 1rem}.hero-card{padding:2rem 1.3rem;border:1px solid var(--line);border-radius:1rem;background:var(--surface);text-align:center;margin:1rem 0 1.4rem}.hero-card .eyebrow{margin-bottom:1.1rem}.hero-card h1{margin-bottom:.9rem}.hero-card p{color:var(--muted);font-size:.9rem}.rule{padding:1rem;border-left:2px solid var(--accent);color:var(--muted);font-size:.85rem;background:#19262088;margin:1.2rem 0}.roster{list-style:none;padding:0;display:grid;gap:.6rem;margin:1rem 0}.roster li{display:flex;align-items:center;justify-content:space-between;gap:1rem;border:1px solid var(--line);border-radius:.6rem;padding:.85rem 1rem;background:var(--surface);overflow-wrap:anywhere}.roster button{border:1px solid #506356;border-radius:.4rem;background:transparent;color:var(--ink);padding:.55rem .75rem;min-height:2.75rem;font-size:.8rem;flex-shrink:0}.roster .name{min-width:0}.role-tag{font-size:.75rem;color:var(--accent);text-align:right;flex-shrink:0}.roster .out{color:var(--muted)}.final-word{font-size:clamp(1.8rem,7vw,2.6rem);font-weight:730;line-height:1.25;overflow-wrap:anywhere;margin:.7rem 0}.final-label{font-size:.75rem;color:var(--muted);margin:1rem 0 0}dialog{width:min(100% - 2rem,32rem);max-height:85dvh;overflow-y:auto;border:1px solid var(--line);border-radius:1rem;padding:1.5rem;background:var(--bg);color:var(--ink);box-shadow:0 1rem 5rem #0008}dialog::backdrop{background:#050d09cc}dialog h2{font-size:1.6rem;overflow-wrap:anywhere}dialog p,dialog li{font-size:.9rem;color:var(--muted)}dialog ol{padding-left:1.3rem}dialog li{padding:.4rem 0}dialog strong{color:var(--ink)}.sr-only{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}@media(min-width:50rem){.app{padding-top:2rem}.private-card{min-height:29rem;padding:1.8rem}}@media(max-width:22rem){.app{padding-inline:.9rem}.brand{font-size:1rem}.topbar{gap:.5rem}.top-actions{gap:.5rem}.help-button{padding-inline:.55rem}.private-card{padding:1.2rem 1rem}.roster li{padding:.7rem}.roster button{padding-inline:.55rem}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M3 16Q16 2 29 16Q16 30 3 16Z"/><circle cx="16" cy="16" r="4"/></svg>El impostor</div>
+      <div class="top-actions"><button class="text-button" data-action="restart" id="restart" hidden>Nueva partida</button><button class="help-button" data-action="help">Cómo jugar</button></div>
+    </header>
+    <div id="storage-notice" class="notice" role="status" hidden></div>
+    <main id="screen" tabindex="-1"></main>
+  </div>
+  <dialog id="confirm-dialog" aria-labelledby="confirm-title"></dialog>
+  <dialog id="help-dialog" aria-labelledby="help-title">
+    <p class="eyebrow">Un celular · De 3 a 20 personas</p><h2 id="help-title">Una palabra. Algunas sospechas.</h2>
+    <ol>
+      <li>Agreguen sus nombres, elijan un mazo y la cantidad de impostores. Cada persona juega <strong>individualmente</strong>.</li>
+      <li>Pásense el celular. Cada uno toca <strong>«Ver mi rol»</strong> en privado y después <strong>«Ocultar y pasar»</strong>. Los jugadores normales ven la misma palabra; los impostores, solamente una pista. Los impostores no saben quiénes son sus compañeros.</li>
+      <li>En su turno, digan <strong>una sola palabra relacionada</strong>, sin decir la palabra secreta, sin gestos ni explicaciones. No se salteen a nadie.</li>
+      <li>Por ejemplo, con «cementerio» podrían decir «silencio», «flores» o «noche». Un impostor podría recibir la pista «lugar».</li>
+      <li>Después de cada ronda, discutan y <strong>voten en voz alta</strong>. Una persona marca a quien el grupo decidió eliminar. Los eliminados dejan de hablar en las rondas y de votar.</li>
+      <li>Si hay empate, vuelvan a votar entre los empatados. Si sigue el empate, pueden pasar a otra ronda <strong>sin eliminar a nadie</strong>.</li>
+    </ol>
+    <h2>Cómo se gana</h2>
+    <p>Los normales ganan al eliminar a todos los impostores. Los impostores ganan si, después de una eliminación, quedan tantos impostores como normales, o más.</p>
+    <p>Con <strong>«Última oportunidad»</strong>, el último impostor eliminado tiene un único intento de decir la palabra secreta. Si acierta, ganan los impostores; si falla, ganan los normales. El grupo confirma el resultado. Los impostores eliminados antes no tienen intentos ni ayudan en este último.</p>
+    <p>No hay límite de rondas. La app organiza turnos y eliminaciones; la conversación y las votaciones se hacen entre ustedes.</p>
+    <div class="actions"><button class="primary" data-action="close-help">Entendido</button></div>
+  </dialog>
+  <script>
+  'use strict';
+  // DATA: stable IDs keep word history independent of the selected deck.
+  const WORDS = [
+  {
+    "id": "general-pizza",
+    "word": "Pizza",
+    "hint": "Reunión",
+    "deck": "general"
+  },
+  {
+    "id": "general-empanada",
+    "word": "Empanada",
+    "hint": "Comida",
+    "deck": "general"
+  },
+  {
+    "id": "general-asado",
+    "word": "Asado",
+    "hint": "Domingo",
+    "deck": "general"
+  },
+  {
+    "id": "general-milanesa",
+    "word": "Milanesa",
+    "hint": "Casero",
+    "deck": "general"
+  },
+  {
+    "id": "general-hamburguesa",
+    "word": "Hamburguesa",
+    "hint": "Salida",
+    "deck": "general"
+  },
+  {
+    "id": "general-pancho",
+    "word": "Pancho",
+    "hint": "Puesto",
+    "deck": "general"
+  },
+  {
+    "id": "general-sushi",
+    "word": "Sushi",
+    "hint": "Preparación",
+    "deck": "general"
+  },
+  {
+    "id": "general-fideos",
+    "word": "Fideos",
+    "hint": "Almuerzo",
+    "deck": "general"
+  },
+  {
+    "id": "general-arroz",
+    "word": "Arroz",
+    "hint": "Acompañamiento",
+    "deck": "general"
+  },
+  {
+    "id": "general-ensalada",
+    "word": "Ensalada",
+    "hint": "Frescura",
+    "deck": "general"
+  },
+  {
+    "id": "general-sopa",
+    "word": "Sopa",
+    "hint": "Invierno",
+    "deck": "general"
+  },
+  {
+    "id": "general-tarta",
+    "word": "Tarta",
+    "hint": "Porciones",
+    "deck": "general"
+  },
+  {
+    "id": "general-tortilla",
+    "word": "Tortilla",
+    "hint": "Comida",
+    "deck": "general"
+  },
+  {
+    "id": "general-polenta",
+    "word": "Polenta",
+    "hint": "Calor",
+    "deck": "general"
+  },
+  {
+    "id": "general-pure",
+    "word": "Puré",
+    "hint": "Textura",
+    "deck": "general"
+  },
+  {
+    "id": "general-noquis",
+    "word": "Ñoquis",
+    "hint": "Tradición",
+    "deck": "general"
+  },
+  {
+    "id": "general-lentejas",
+    "word": "Lentejas",
+    "hint": "Cuchara",
+    "deck": "general"
+  },
+  {
+    "id": "general-sandwich",
+    "word": "Sándwich",
+    "hint": "Practicidad",
+    "deck": "general"
+  },
+  {
+    "id": "general-papas-fritas",
+    "word": "Papas fritas",
+    "hint": "Compartir",
+    "deck": "general"
+  },
+  {
+    "id": "general-locro",
+    "word": "Locro",
+    "hint": "Feriado",
+    "deck": "general"
+  },
+  {
+    "id": "general-helado",
+    "word": "Helado",
+    "hint": "Verano",
+    "deck": "general"
+  },
+  {
+    "id": "general-chocolate",
+    "word": "Chocolate",
+    "hint": "Antojo",
+    "deck": "general"
+  },
+  {
+    "id": "general-alfajor",
+    "word": "Alfajor",
+    "hint": "Recreo",
+    "deck": "general"
+  },
+  {
+    "id": "general-flan",
+    "word": "Flan",
+    "hint": "Postre",
+    "deck": "general"
+  },
+  {
+    "id": "general-budin",
+    "word": "Budín",
+    "hint": "Merienda",
+    "deck": "general"
+  },
+  {
+    "id": "general-medialuna",
+    "word": "Medialuna",
+    "hint": "Mañana",
+    "deck": "general"
+  },
+  {
+    "id": "general-churro",
+    "word": "Churro",
+    "hint": "Paseo",
+    "deck": "general"
+  },
+  {
+    "id": "general-torta",
+    "word": "Torta",
+    "hint": "Festejo",
+    "deck": "general"
+  },
+  {
+    "id": "general-caramelo",
+    "word": "Caramelo",
+    "hint": "Envoltorio",
+    "deck": "general"
+  },
+  {
+    "id": "general-galletita",
+    "word": "Galletita",
+    "hint": "Paquete",
+    "deck": "general"
+  },
+  {
+    "id": "general-pochoclo",
+    "word": "Pochoclo",
+    "hint": "Salida",
+    "deck": "general"
+  },
+  {
+    "id": "general-dulce-de-leche",
+    "word": "Dulce de leche",
+    "hint": "Tentación",
+    "deck": "general"
+  },
+  {
+    "id": "general-mermelada",
+    "word": "Mermelada",
+    "hint": "Untar",
+    "deck": "general"
+  },
+  {
+    "id": "general-queso",
+    "word": "Queso",
+    "hint": "Picada",
+    "deck": "general"
+  },
+  {
+    "id": "general-manteca",
+    "word": "Manteca",
+    "hint": "Desayuno",
+    "deck": "general"
+  },
+  {
+    "id": "general-huevo",
+    "word": "Huevo",
+    "hint": "Cocina",
+    "deck": "general"
+  },
+  {
+    "id": "general-banana",
+    "word": "Banana",
+    "hint": "Energía",
+    "deck": "general"
+  },
+  {
+    "id": "general-manzana",
+    "word": "Manzana",
+    "hint": "Colación",
+    "deck": "general"
+  },
+  {
+    "id": "general-naranja",
+    "word": "Naranja",
+    "hint": "Frescura",
+    "deck": "general"
+  },
+  {
+    "id": "general-frutilla",
+    "word": "Frutilla",
+    "hint": "Temporada",
+    "deck": "general"
+  },
+  {
+    "id": "general-limon",
+    "word": "Limón",
+    "hint": "Intensidad",
+    "deck": "general"
+  },
+  {
+    "id": "general-sandia",
+    "word": "Sandía",
+    "hint": "Compartir",
+    "deck": "general"
+  },
+  {
+    "id": "general-uva",
+    "word": "Uva",
+    "hint": "Fruta",
+    "deck": "general"
+  },
+  {
+    "id": "general-palta",
+    "word": "Palta",
+    "hint": "Cremosidad",
+    "deck": "general"
+  },
+  {
+    "id": "general-tomate",
+    "word": "Tomate",
+    "hint": "Huerta",
+    "deck": "general"
+  },
+  {
+    "id": "general-cebolla",
+    "word": "Cebolla",
+    "hint": "Cocina",
+    "deck": "general"
+  },
+  {
+    "id": "general-zanahoria",
+    "word": "Zanahoria",
+    "hint": "Tierra",
+    "deck": "general"
+  },
+  {
+    "id": "general-lechuga",
+    "word": "Lechuga",
+    "hint": "Hojas",
+    "deck": "general"
+  },
+  {
+    "id": "general-papa",
+    "word": "Papa",
+    "hint": "Versatilidad",
+    "deck": "general"
+  },
+  {
+    "id": "general-ajo",
+    "word": "Ajo",
+    "hint": "Aroma",
+    "deck": "general"
+  },
+  {
+    "id": "general-mate",
+    "word": "Mate",
+    "hint": "Compañía",
+    "deck": "general"
+  },
+  {
+    "id": "general-cafe",
+    "word": "Café",
+    "hint": "Pausa",
+    "deck": "general"
+  },
+  {
+    "id": "general-te",
+    "word": "Té",
+    "hint": "Calma",
+    "deck": "general"
+  },
+  {
+    "id": "general-cerveza",
+    "word": "Cerveza",
+    "hint": "Encuentro",
+    "deck": "general"
+  },
+  {
+    "id": "general-vino",
+    "word": "Vino",
+    "hint": "Cena",
+    "deck": "general"
+  },
+  {
+    "id": "general-fernet",
+    "word": "Fernet",
+    "hint": "Noche",
+    "deck": "general"
+  },
+  {
+    "id": "general-limonada",
+    "word": "Limonada",
+    "hint": "Calor",
+    "deck": "general"
+  },
+  {
+    "id": "general-agua",
+    "word": "Agua",
+    "hint": "Necesidad",
+    "deck": "general"
+  },
+  {
+    "id": "general-jugo",
+    "word": "Jugo",
+    "hint": "Fruta",
+    "deck": "general"
+  },
+  {
+    "id": "general-licuado",
+    "word": "Licuado",
+    "hint": "Mezcla",
+    "deck": "general"
+  },
+  {
+    "id": "general-perro",
+    "word": "Perro",
+    "hint": "Compañía",
+    "deck": "general"
+  },
+  {
+    "id": "general-gato",
+    "word": "Gato",
+    "hint": "Independencia",
+    "deck": "general"
+  },
+  {
+    "id": "general-caballo",
+    "word": "Caballo",
+    "hint": "Campo",
+    "deck": "general"
+  },
+  {
+    "id": "general-vaca",
+    "word": "Vaca",
+    "hint": "Granja",
+    "deck": "general"
+  },
+  {
+    "id": "general-cerdo",
+    "word": "Cerdo",
+    "hint": "Barro",
+    "deck": "general"
+  },
+  {
+    "id": "general-oveja",
+    "word": "Oveja",
+    "hint": "Abrigo",
+    "deck": "general"
+  },
+  {
+    "id": "general-gallina",
+    "word": "Gallina",
+    "hint": "Corral",
+    "deck": "general"
+  },
+  {
+    "id": "general-pato",
+    "word": "Pato",
+    "hint": "Estanque",
+    "deck": "general"
+  },
+  {
+    "id": "general-conejo",
+    "word": "Conejo",
+    "hint": "Animal",
+    "deck": "general"
+  },
+  {
+    "id": "general-raton",
+    "word": "Ratón",
+    "hint": "Pequeño",
+    "deck": "general"
+  },
+  {
+    "id": "general-elefante",
+    "word": "Elefante",
+    "hint": "Tamaño",
+    "deck": "general"
+  },
+  {
+    "id": "general-jirafa",
+    "word": "Jirafa",
+    "hint": "Altura",
+    "deck": "general"
+  },
+  {
+    "id": "general-leon",
+    "word": "León",
+    "hint": "Sabana",
+    "deck": "general"
+  },
+  {
+    "id": "general-tigre",
+    "word": "Tigre",
+    "hint": "Animal",
+    "deck": "general"
+  },
+  {
+    "id": "general-oso",
+    "word": "Oso",
+    "hint": "Bosque",
+    "deck": "general"
+  },
+  {
+    "id": "general-mono",
+    "word": "Mono",
+    "hint": "Agilidad",
+    "deck": "general"
+  },
+  {
+    "id": "general-cebra",
+    "word": "Cebra",
+    "hint": "Contraste",
+    "deck": "general"
+  },
+  {
+    "id": "general-canguro",
+    "word": "Canguro",
+    "hint": "Movimiento",
+    "deck": "general"
+  },
+  {
+    "id": "general-pinguino",
+    "word": "Pingüino",
+    "hint": "Frío",
+    "deck": "general"
+  },
+  {
+    "id": "general-delfin",
+    "word": "Delfín",
+    "hint": "Grupo",
+    "deck": "general"
+  },
+  {
+    "id": "general-tiburon",
+    "word": "Tiburón",
+    "hint": "Profundidad",
+    "deck": "general"
+  },
+  {
+    "id": "general-ballena",
+    "word": "Ballena",
+    "hint": "Océano",
+    "deck": "general"
+  },
+  {
+    "id": "general-pulpo",
+    "word": "Pulpo",
+    "hint": "Mar",
+    "deck": "general"
+  },
+  {
+    "id": "general-tortuga",
+    "word": "Tortuga",
+    "hint": "Paciencia",
+    "deck": "general"
+  },
+  {
+    "id": "general-caracol",
+    "word": "Caracol",
+    "hint": "Humedad",
+    "deck": "general"
+  },
+  {
+    "id": "general-mariposa",
+    "word": "Mariposa",
+    "hint": "Transformación",
+    "deck": "general"
+  },
+  {
+    "id": "general-abeja",
+    "word": "Abeja",
+    "hint": "Jardín",
+    "deck": "general"
+  },
+  {
+    "id": "general-hormiga",
+    "word": "Hormiga",
+    "hint": "Trabajo",
+    "deck": "general"
+  },
+  {
+    "id": "general-loro",
+    "word": "Loro",
+    "hint": "Sonido",
+    "deck": "general"
+  },
+  {
+    "id": "general-aguila",
+    "word": "Águila",
+    "hint": "Altura",
+    "deck": "general"
+  },
+  {
+    "id": "general-playa",
+    "word": "Playa",
+    "hint": "Descanso",
+    "deck": "general"
+  },
+  {
+    "id": "general-montana",
+    "word": "Montaña",
+    "hint": "Paisaje",
+    "deck": "general"
+  },
+  {
+    "id": "general-rio",
+    "word": "Río",
+    "hint": "Recorrido",
+    "deck": "general"
+  },
+  {
+    "id": "general-lago",
+    "word": "Lago",
+    "hint": "Quietud",
+    "deck": "general"
+  },
+  {
+    "id": "general-bosque",
+    "word": "Bosque",
+    "hint": "Sombra",
+    "deck": "general"
+  },
+  {
+    "id": "general-desierto",
+    "word": "Desierto",
+    "hint": "Extensión",
+    "deck": "general"
+  },
+  {
+    "id": "general-isla",
+    "word": "Isla",
+    "hint": "Distancia",
+    "deck": "general"
+  },
+  {
+    "id": "general-volcan",
+    "word": "Volcán",
+    "hint": "Paisaje",
+    "deck": "general"
+  },
+  {
+    "id": "general-cascada",
+    "word": "Cascada",
+    "hint": "Ruido",
+    "deck": "general"
+  },
+  {
+    "id": "general-cueva",
+    "word": "Cueva",
+    "hint": "Interior",
+    "deck": "general"
+  },
+  {
+    "id": "general-escuela",
+    "word": "Escuela",
+    "hint": "Rutina",
+    "deck": "general"
+  },
+  {
+    "id": "general-hospital",
+    "word": "Hospital",
+    "hint": "Guardia",
+    "deck": "general"
+  },
+  {
+    "id": "general-biblioteca",
+    "word": "Biblioteca",
+    "hint": "Silencio",
+    "deck": "general"
+  },
+  {
+    "id": "general-supermercado",
+    "word": "Supermercado",
+    "hint": "Compra",
+    "deck": "general"
+  },
+  {
+    "id": "general-panaderia",
+    "word": "Panadería",
+    "hint": "Mañana",
+    "deck": "general"
+  },
+  {
+    "id": "general-farmacia",
+    "word": "Farmacia",
+    "hint": "Cuidado",
+    "deck": "general"
+  },
+  {
+    "id": "general-cine",
+    "word": "Cine",
+    "hint": "Oscuridad",
+    "deck": "general"
+  },
+  {
+    "id": "general-teatro",
+    "word": "Teatro",
+    "hint": "Escenario",
+    "deck": "general"
+  },
+  {
+    "id": "general-museo",
+    "word": "Museo",
+    "hint": "Recorrido",
+    "deck": "general"
+  },
+  {
+    "id": "general-aeropuerto",
+    "word": "Aeropuerto",
+    "hint": "Espera",
+    "deck": "general"
+  },
+  {
+    "id": "general-estacion-de-tren",
+    "word": "Estación de tren",
+    "hint": "Lugar",
+    "deck": "general"
+  },
+  {
+    "id": "general-restaurante",
+    "word": "Restaurante",
+    "hint": "Servicio",
+    "deck": "general"
+  },
+  {
+    "id": "general-hotel",
+    "word": "Hotel",
+    "hint": "Viaje",
+    "deck": "general"
+  },
+  {
+    "id": "general-plaza",
+    "word": "Plaza",
+    "hint": "Encuentro",
+    "deck": "general"
+  },
+  {
+    "id": "general-gimnasio",
+    "word": "Gimnasio",
+    "hint": "Esfuerzo",
+    "deck": "general"
+  },
+  {
+    "id": "general-pileta",
+    "word": "Pileta",
+    "hint": "Verano",
+    "deck": "general"
+  },
+  {
+    "id": "general-estadio",
+    "word": "Estadio",
+    "hint": "Multitud",
+    "deck": "general"
+  },
+  {
+    "id": "general-iglesia",
+    "word": "Iglesia",
+    "hint": "Ceremonia",
+    "deck": "general"
+  },
+  {
+    "id": "general-oficina",
+    "word": "Oficina",
+    "hint": "Horario",
+    "deck": "general"
+  },
+  {
+    "id": "general-balcon",
+    "word": "Balcón",
+    "hint": "Aire",
+    "deck": "general"
+  },
+  {
+    "id": "general-celular",
+    "word": "Celular",
+    "hint": "Conexión",
+    "deck": "general"
+  },
+  {
+    "id": "general-llave",
+    "word": "Llave",
+    "hint": "Acceso",
+    "deck": "general"
+  },
+  {
+    "id": "general-billetera",
+    "word": "Billetera",
+    "hint": "Bolsillo",
+    "deck": "general"
+  },
+  {
+    "id": "general-mochila",
+    "word": "Mochila",
+    "hint": "Carga",
+    "deck": "general"
+  },
+  {
+    "id": "general-paraguas",
+    "word": "Paraguas",
+    "hint": "Pronóstico",
+    "deck": "general"
+  },
+  {
+    "id": "general-anteojos",
+    "word": "Anteojos",
+    "hint": "Mirada",
+    "deck": "general"
+  },
+  {
+    "id": "general-reloj",
+    "word": "Reloj",
+    "hint": "Rutina",
+    "deck": "general"
+  },
+  {
+    "id": "general-espejo",
+    "word": "Espejo",
+    "hint": "Imagen",
+    "deck": "general"
+  },
+  {
+    "id": "general-almohada",
+    "word": "Almohada",
+    "hint": "Descanso",
+    "deck": "general"
+  },
+  {
+    "id": "general-frazada",
+    "word": "Frazada",
+    "hint": "Invierno",
+    "deck": "general"
+  },
+  {
+    "id": "general-sillon",
+    "word": "Sillón",
+    "hint": "Comodidad",
+    "deck": "general"
+  },
+  {
+    "id": "general-mesa",
+    "word": "Mesa",
+    "hint": "Reunión",
+    "deck": "general"
+  },
+  {
+    "id": "general-silla",
+    "word": "Silla",
+    "hint": "Espera",
+    "deck": "general"
+  },
+  {
+    "id": "general-lampara",
+    "word": "Lámpara",
+    "hint": "Lectura",
+    "deck": "general"
+  },
+  {
+    "id": "general-heladera",
+    "word": "Heladera",
+    "hint": "Conservación",
+    "deck": "general"
+  },
+  {
+    "id": "general-horno",
+    "word": "Horno",
+    "hint": "Preparación",
+    "deck": "general"
+  },
+  {
+    "id": "general-microondas",
+    "word": "Microondas",
+    "hint": "Rapidez",
+    "deck": "general"
+  },
+  {
+    "id": "general-lavarropas",
+    "word": "Lavarropas",
+    "hint": "Rutina",
+    "deck": "general"
+  },
+  {
+    "id": "general-ventilador",
+    "word": "Ventilador",
+    "hint": "Verano",
+    "deck": "general"
+  },
+  {
+    "id": "general-aspiradora",
+    "word": "Aspiradora",
+    "hint": "Limpieza",
+    "deck": "general"
+  },
+  {
+    "id": "general-escoba",
+    "word": "Escoba",
+    "hint": "Limpieza",
+    "deck": "general"
+  },
+  {
+    "id": "general-tijera",
+    "word": "Tijera",
+    "hint": "Manualidad",
+    "deck": "general"
+  },
+  {
+    "id": "general-martillo",
+    "word": "Martillo",
+    "hint": "Arreglo",
+    "deck": "general"
+  },
+  {
+    "id": "general-destornillador",
+    "word": "Destornillador",
+    "hint": "Arreglo",
+    "deck": "general"
+  },
+  {
+    "id": "general-cuchara",
+    "word": "Cuchara",
+    "hint": "Mesa",
+    "deck": "general"
+  },
+  {
+    "id": "general-tenedor",
+    "word": "Tenedor",
+    "hint": "Comida",
+    "deck": "general"
+  },
+  {
+    "id": "general-cuchillo",
+    "word": "Cuchillo",
+    "hint": "Preparación",
+    "deck": "general"
+  },
+  {
+    "id": "general-olla",
+    "word": "Olla",
+    "hint": "Cocina",
+    "deck": "general"
+  },
+  {
+    "id": "general-sarten",
+    "word": "Sartén",
+    "hint": "Cocina",
+    "deck": "general"
+  },
+  {
+    "id": "general-colador",
+    "word": "Colador",
+    "hint": "Separación",
+    "deck": "general"
+  },
+  {
+    "id": "halloween-vampiro",
+    "word": "Vampiro",
+    "hint": "Criatura",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-fantasma",
+    "word": "Fantasma",
+    "hint": "Presencia",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-zombi",
+    "word": "Zombi",
+    "hint": "Multitud",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-momia",
+    "word": "Momia",
+    "hint": "Antigüedad",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-bruja",
+    "word": "Bruja",
+    "hint": "Secreto",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-hombre-lobo",
+    "word": "Hombre lobo",
+    "hint": "Cambio",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-demonio",
+    "word": "Demonio",
+    "hint": "Tentación",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-esqueleto",
+    "word": "Esqueleto",
+    "hint": "Estructura",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-calavera",
+    "word": "Calavera",
+    "hint": "Símbolo",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-parca",
+    "word": "Parca",
+    "hint": "Despedida",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-monstruo",
+    "word": "Monstruo",
+    "hint": "Amenaza",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-gargola",
+    "word": "Gárgola",
+    "hint": "Altura",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-duende",
+    "word": "Duende",
+    "hint": "Travesura",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-la-llorona",
+    "word": "La Llorona",
+    "hint": "Leyenda",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-espantapajaros",
+    "word": "Espantapájaros",
+    "hint": "Campo",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-payaso",
+    "word": "Payaso",
+    "hint": "Sonrisa",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-muneca",
+    "word": "Muñeca",
+    "hint": "Infancia",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-marioneta",
+    "word": "Marioneta",
+    "hint": "Control",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-frankenstein",
+    "word": "Frankenstein",
+    "hint": "Experimento",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-jinete-sin-cabeza",
+    "word": "Jinete sin cabeza",
+    "hint": "Camino",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-cementerio",
+    "word": "Cementerio",
+    "hint": "Lugar",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-castillo",
+    "word": "Castillo",
+    "hint": "Antigüedad",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-mansion",
+    "word": "Mansión",
+    "hint": "Herencia",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-casa-abandonada",
+    "word": "Casa abandonada",
+    "hint": "Olvido",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-sotano",
+    "word": "Sótano",
+    "hint": "Lugar",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-atico",
+    "word": "Ático",
+    "hint": "Lugar",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-cripta",
+    "word": "Cripta",
+    "hint": "Encierro",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-morgue",
+    "word": "Morgue",
+    "hint": "Frío",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-hospital-abandonado",
+    "word": "Hospital abandonado",
+    "hint": "Pasado",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-bosque-oscuro",
+    "word": "Bosque oscuro",
+    "hint": "Desorientación",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-pantano",
+    "word": "Pantano",
+    "hint": "Humedad",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-laberinto",
+    "word": "Laberinto",
+    "hint": "Salida",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-tunel",
+    "word": "Túnel",
+    "hint": "Paso",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-pozo",
+    "word": "Pozo",
+    "hint": "Profundidad",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-catacumbas",
+    "word": "Catacumbas",
+    "hint": "Recorrido",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-mazmorra",
+    "word": "Mazmorra",
+    "hint": "Encierro",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-ruinas",
+    "word": "Ruinas",
+    "hint": "Pasado",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-cabana",
+    "word": "Cabaña",
+    "hint": "Aislamiento",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-faro",
+    "word": "Faro",
+    "hint": "Distancia",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-hotel-embrujado",
+    "word": "Hotel embrujado",
+    "hint": "Huéspedes",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-ataud",
+    "word": "Ataúd",
+    "hint": "Objeto",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-urna",
+    "word": "Urna",
+    "hint": "Recuerdo",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-lapida",
+    "word": "Lápida",
+    "hint": "Nombre",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-cruz",
+    "word": "Cruz",
+    "hint": "Símbolo",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-vela",
+    "word": "Vela",
+    "hint": "Luz",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-candelabro",
+    "word": "Candelabro",
+    "hint": "Decoración",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-calabaza",
+    "word": "Calabaza",
+    "hint": "Temporada",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-mascara",
+    "word": "Máscara",
+    "hint": "Identidad",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-disfraz",
+    "word": "Disfraz",
+    "hint": "Apariencia",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-capa",
+    "word": "Capa",
+    "hint": "Vestimenta",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-guadana",
+    "word": "Guadaña",
+    "hint": "Herramienta",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-escoba-voladora",
+    "word": "Escoba voladora",
+    "hint": "Viaje",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-caldero",
+    "word": "Caldero",
+    "hint": "Mezcla",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-pocion",
+    "word": "Poción",
+    "hint": "Efecto",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-libro-de-hechizos",
+    "word": "Libro de hechizos",
+    "hint": "Conocimiento",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-bola-de-cristal",
+    "word": "Bola de cristal",
+    "hint": "Consulta",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-tabla-ouija",
+    "word": "Tabla ouija",
+    "hint": "Contacto",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-amuleto",
+    "word": "Amuleto",
+    "hint": "Protección",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-dracula",
+    "word": "Drácula",
+    "hint": "Anfitrión",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-chucky",
+    "word": "Chucky",
+    "hint": "Infancia",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-pentagrama",
+    "word": "Pentagrama",
+    "hint": "Marca",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-cadenas",
+    "word": "Cadenas",
+    "hint": "Atadura",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-candado",
+    "word": "Candado",
+    "hint": "Cierre",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-cofre",
+    "word": "Cofre",
+    "hint": "Secreto",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-motosierra",
+    "word": "Motosierra",
+    "hint": "Herramienta",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-sangre",
+    "word": "Sangre",
+    "hint": "Rastro",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-colmillos",
+    "word": "Colmillos",
+    "hint": "Sonrisa",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-garras",
+    "word": "Garras",
+    "hint": "Marcas",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-huesos",
+    "word": "Huesos",
+    "hint": "Restos",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-cicatriz",
+    "word": "Cicatriz",
+    "hint": "Recuerdo",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-murcielago",
+    "word": "Murciélago",
+    "hint": "Movimiento",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-arana",
+    "word": "Araña",
+    "hint": "Rincón",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-telarana",
+    "word": "Telaraña",
+    "hint": "Abandono",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-cuervo",
+    "word": "Cuervo",
+    "hint": "Testigo",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-buho",
+    "word": "Búho",
+    "hint": "Vigilancia",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-serpiente",
+    "word": "Serpiente",
+    "hint": "Cautela",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-rata",
+    "word": "Rata",
+    "hint": "Escondite",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-freddy-krueger",
+    "word": "Freddy Krueger",
+    "hint": "Descanso",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-niebla",
+    "word": "Niebla",
+    "hint": "Ambiente",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-sombra",
+    "word": "Sombra",
+    "hint": "Compañía",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-oscuridad",
+    "word": "Oscuridad",
+    "hint": "Ambiente",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-luna-llena",
+    "word": "Luna llena",
+    "hint": "Ciclo",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-tormenta",
+    "word": "Tormenta",
+    "hint": "Tensión",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-relampago",
+    "word": "Relámpago",
+    "hint": "Instante",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-eclipse",
+    "word": "Eclipse",
+    "hint": "Cambio",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-aullido",
+    "word": "Aullido",
+    "hint": "Distancia",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-grito",
+    "word": "Grito",
+    "hint": "Reacción",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-susurro",
+    "word": "Susurro",
+    "hint": "Cercanía",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-crujido",
+    "word": "Crujido",
+    "hint": "Movimiento",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-pasos",
+    "word": "Pasos",
+    "hint": "Ritmo",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-pesadilla",
+    "word": "Pesadilla",
+    "hint": "Descanso",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-sonambulismo",
+    "word": "Sonambulismo",
+    "hint": "Madrugada",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-maldicion",
+    "word": "Maldición",
+    "hint": "Consecuencia",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-posesion",
+    "word": "Posesión",
+    "hint": "Control",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-exorcismo",
+    "word": "Exorcismo",
+    "hint": "Intervención",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-ritual",
+    "word": "Ritual",
+    "hint": "Repetición",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-invocacion",
+    "word": "Invocación",
+    "hint": "Ritual",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-aparicion",
+    "word": "Aparición",
+    "hint": "Sorpresa",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-premonicion",
+    "word": "Premonición",
+    "hint": "Fenómeno",
+    "deck": "halloween"
+  },
+  {
+    "id": "halloween-resurreccion",
+    "word": "Resurrección",
+    "hint": "Regreso",
+    "deck": "halloween"
+  }
+];
+  const WORD_BY_ID = new Map(WORDS.map(entry => [entry.id, entry]));
+  const DECKS = {general:'General',halloween:'Halloween',mixed:'Mezclado'};
+  const STORAGE_KEY = 'el-impostor-v1';
+  const VERSION = 1;
+  const $ = id => document.getElementById(id);
+  const nameKey = text => text.trim().replace(/\s+/g,' ').toLocaleLowerCase('es');
+  const maxImpostors = count => Math.max(0,Math.min(5,Math.floor((count-1)/2)));
+  const freshState = () => ({version:VERSION,players:[],settings:{deck:'mixed',impostors:1,lastChance:true},history:[],game:null});
+  let state = freshState();
+  let privateVisible = false;
+  let blockedUntil = 0;
+  let pendingConfirmation = null;
+  let storageFailed = false;
+  let recoveryNotice = false;
+
+  // STATE VALIDATION: restore complete, coherent games, never a visible secret.
+  function activePlayers(game = state.game, players = state.players) {
+    return players.filter(player => !game.eliminated.includes(player.id));
+  }
+  function orderedActive(starterId, game = state.game, players = state.players) {
+    const start = players.findIndex(player => player.id === starterId);
+    return [...players.slice(start),...players.slice(0,start)].filter(player => !game.eliminated.includes(player.id)).map(player => player.id);
+  }
+  function validSaved(saved) {
+    if (!saved || saved.version !== VERSION || !Array.isArray(saved.players) || saved.players.length > 20) return false;
+    const players = saved.players;
+    if (!players.every(player => player && typeof player.id === 'string' && /^[\w-]{1,80}$/.test(player.id) && typeof player.name === 'string' && player.name.trim() === player.name && player.name.length > 0 && player.name.length <= 32)) return false;
+    if (new Set(players.map(player => player.id)).size !== players.length || new Set(players.map(player => nameKey(player.name))).size !== players.length) return false;
+    const options = saved.settings;
+    if (!options || !Object.hasOwn(DECKS,options.deck) || !Number.isInteger(options.impostors) || options.impostors < 1 || options.impostors > Math.max(1,maxImpostors(players.length)) || typeof options.lastChance !== 'boolean') return false;
+    if (!Array.isArray(saved.history) || saved.history.length > WORDS.length || new Set(saved.history).size !== saved.history.length || !saved.history.every(id => WORD_BY_ID.has(id))) return false;
+    if (saved.game === null) return true;
+    const game = saved.game;
+    const ids = new Set(players.map(player => player.id));
+    const listOfPlayers = list => Array.isArray(list) && new Set(list).size === list.length && list.every(id => ids.has(id));
+    if (!game || players.length < 3 || typeof game.id !== 'string' || !WORD_BY_ID.has(game.wordId) || !saved.history.includes(game.wordId)) return false;
+    if (options.deck !== 'mixed' && WORD_BY_ID.get(game.wordId).deck !== options.deck) return false;
+    if (!listOfPlayers(game.impostorIds) || game.impostorIds.length !== options.impostors || !listOfPlayers(game.eliminated) || game.eliminated.length >= players.length) return false;
+    if (!['deal','ready','speaking','vote','eliminated','lastChance','final'].includes(game.phase) || !Number.isSafeInteger(game.round) || game.round < 1 || !ids.has(game.starterId) || typeof game.tied !== 'boolean') return false;
+    if (!Number.isInteger(game.dealIndex) || game.dealIndex < 0 || game.dealIndex > players.length || (game.phase === 'deal' ? game.dealIndex >= players.length : game.dealIndex !== players.length)) return false;
+    if (game.lastEliminatedId !== (game.eliminated.at(-1) ?? null) || ![null,true,false].includes(game.guessCorrect)) return false;
+    if (!listOfPlayers(game.order) || !Number.isInteger(game.speakerIndex) || game.speakerIndex < 0) return false;
+    const active = activePlayers(game,players);
+    const impostors = active.filter(player => game.impostorIds.includes(player.id)).length;
+    const normals = active.length-impostors;
+    if (game.phase === 'speaking') {
+      if (JSON.stringify(game.order) !== JSON.stringify(orderedActive(game.starterId,game,players)) || game.speakerIndex >= game.order.length) return false;
+    } else if (game.order.length !== 0 || game.speakerIndex !== 0) return false;
+    if (['deal','ready'].includes(game.phase) && (game.eliminated.length || game.round !== 1)) return false;
+    if (['deal','ready','speaking','vote','eliminated'].includes(game.phase) && (impostors < 1 || impostors >= normals || game.winner !== null || game.guessCorrect !== null)) return false;
+    if (game.phase === 'eliminated' && !game.lastEliminatedId) return false;
+    if (game.phase === 'lastChance' && (!options.lastChance || impostors !== 0 || !game.impostorIds.includes(game.lastEliminatedId) || game.winner !== null || game.guessCorrect !== null)) return false;
+    if (game.phase === 'final') {
+      if (!['normals','impostors'].includes(game.winner)) return false;
+      if (game.winner === 'normals' && (impostors !== 0 || (options.lastChance ? game.guessCorrect !== false : game.guessCorrect !== null))) return false;
+      if (game.winner === 'impostors' && !(impostors >= normals || (impostors === 0 && options.lastChance && game.guessCorrect === true && game.impostorIds.includes(game.lastEliminatedId)))) return false;
+    }
+    return true;
+  }
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw !== null) {
+      let parsed;
+      try { parsed = JSON.parse(raw); } catch { recoveryNotice = true; }
+      if (parsed && validSaved(parsed)) state = parsed;
+      else recoveryNotice = true;
+    }
+  } catch { storageFailed = true; }
+  function save() {
+    try { localStorage.setItem(STORAGE_KEY,JSON.stringify(state)); }
+    catch { storageFailed = true; }
+    renderNotice();
+  }
+  function renderNotice() {
+    const notice = $('storage-notice');
+    notice.hidden = !storageFailed && !recoveryNotice;
+    notice.textContent = storageFailed ? 'Este navegador no está guardando la partida. Si cerrás o recargás la página, podés perder el progreso.' : recoveryNotice ? 'La partida guardada no se pudo recuperar. Podés empezar una nueva.' : '';
+  }
+
+  // TRANSITIONS: random draws have no role quotas or previous-game restrictions.
+  function randomIndex(length) {
+    const range = 2**32, limit = range-range%length, value = new Uint32Array(1);
+    do { crypto.getRandomValues(value); } while (value[0] >= limit);
+    return value[0]%length;
+  }
+  function shuffled(ids) {
+    const result = [...ids];
+    for (let index=result.length-1;index>0;index--) {
+      const other = randomIndex(index+1);
+      [result[index],result[other]] = [result[other],result[index]];
+    }
+    return result;
+  }
+  function wordPool(deck = state.settings.deck) { return WORDS.filter(entry => deck === 'mixed' || entry.deck === deck); }
+  function availableWords() { const used = new Set(state.history); return wordPool().filter(entry => !used.has(entry.id)); }
+  function playerName(id) { return state.players.find(player => player.id === id)?.name ?? ''; }
+  function beginGame() {
+    if (state.players.length < 3 || state.players.length > 20 || state.settings.impostors > maxImpostors(state.players.length)) return;
+    const available = availableWords();
+    if (!available.length) {
+      confirmAction('Este mazo ya se jugó completo',`Se usaron las ${wordPool().length} palabras de ${DECKS[state.settings.deck]}. Podés reiniciar solamente el historial de este mazo. Los otros modos conservan las palabras que no pertenecen a este mazo.`, 'Reiniciar este mazo y repartir',() => {
+        const poolIds = new Set(wordPool().map(entry => entry.id));
+        state.history = state.history.filter(id => !poolIds.has(id));
+        save(); beginGame();
+      });
+      return;
+    }
+    privateVisible = false; pendingConfirmation = null;
+    const word = available[randomIndex(available.length)];
+    const ids = state.players.map(player => player.id);
+    state.history.push(word.id);
+    state.game = {id:crypto.randomUUID(),wordId:word.id,impostorIds:shuffled(ids).slice(0,state.settings.impostors),phase:'deal',dealIndex:0,round:1,starterId:ids[randomIndex(ids.length)],order:[],speakerIndex:0,eliminated:[],lastEliminatedId:null,tied:false,winner:null,guessCorrect:null};
+    recoveryNotice = false; save(); render();
+  }
+  function startRound(rotate = false) {
+    const game = state.game;
+    if (rotate) {
+      const start = state.players.findIndex(player => player.id === game.starterId);
+      for (let offset=1;offset<=state.players.length;offset++) {
+        const candidate = state.players[(start+offset)%state.players.length].id;
+        if (!game.eliminated.includes(candidate)) { game.starterId = candidate; break; }
+      }
+      game.round++;
+    }
+    game.order = orderedActive(game.starterId);
+    game.speakerIndex = 0; game.phase = 'speaking'; game.tied = false;
+    save(); render();
+  }
+  function nextSpeaker() {
+    const game = state.game;
+    if (game.phase !== 'speaking') return;
+    if (game.speakerIndex+1 < game.order.length) game.speakerIndex++;
+    else { game.phase = 'vote'; game.order = []; game.speakerIndex = 0; }
+    save(); render();
+  }
+  function finish(winner, guessCorrect = null) {
+    privateVisible = false;
+    state.game.phase = 'final'; state.game.winner = winner; state.game.guessCorrect = guessCorrect;
+    state.game.order = []; state.game.speakerIndex = 0;
+    save(); render();
+  }
+  function eliminate(id) {
+    const game = state.game;
+    if (game.phase !== 'vote' || !activePlayers().some(player => player.id === id)) return;
+    game.eliminated.push(id); game.lastEliminatedId = id; game.tied = false;
+    const active = activePlayers(), impostors = active.filter(player => game.impostorIds.includes(player.id)).length;
+    if (impostors === 0) {
+      if (state.settings.lastChance) { game.phase = 'lastChance'; save(); render(); }
+      else finish('normals');
+    } else if (impostors >= active.length-impostors) finish('impostors');
+    else { game.phase = 'eliminated'; save(); render(); }
+  }
+  function maskPrivate() {
+    if (privateVisible) { privateVisible = false; render(false); }
+  }
+  function clearGame() {
+    privateVisible = false; pendingConfirmation = null;
+    state.game = null; save(); render();
+  }
+
+  // RENDERING: secret content exists only while explicitly revealed or at the end.
+  function element(tag,attributes = {},...children) {
+    const node = document.createElement(tag);
+    for (const [key,value] of Object.entries(attributes)) {
+      if (value === null || value === undefined || value === false) continue;
+      if (key === 'class') node.className = value;
+      else if (key === 'checked' || key === 'disabled' || key === 'required') node[key] = Boolean(value);
+      else node.setAttribute(key,String(value));
+    }
+    for (const child of children.flat(Infinity)) if (child !== null && child !== undefined) node.append(child instanceof Node ? child : document.createTextNode(String(child)));
+    return node;
+  }
+  const button = (text,action,attrs = {}) => element('button',{type:'button','data-action':action,...attrs},text);
+  const primary = (text,action,attrs = {}) => button(text,action,{class:'primary',...attrs});
+  const secondary = (text,action,attrs = {}) => button(text,action,{class:'secondary',...attrs});
+  const paragraph = (text,className) => element('p',className ? {class:className} : {},text);
+  const actions = (...children) => element('div',{class:'actions'},...children);
+  const eyebrow = text => paragraph(text,'eyebrow');
+  function showError(message) {
+    const error = $('form-error');
+    if (error) { error.textContent = message; error.hidden = false; }
+  }
+  function renderConfig() {
+    const count = state.players.length, maximum = maxImpostors(count), remaining = availableWords().length;
+    const list = element('div',{class:'player-list'});
+    state.players.forEach((player,index) => {
+      const input = element('input',{class:'player-input',id:`player-${player.id}`,value:player.name,maxlength:32,'data-player-id':player.id,'aria-label':`Nombre del jugador ${index+1}`,autocomplete:'off',required:true});
+      list.append(element('div',{class:'player-row'},element('span',{class:'player-number','aria-hidden':'true'},index+1),input,button('×','remove-player',{class:'remove','data-player-id':player.id,'aria-label':`Quitar a ${player.name}`})));
+    });
+    const deck = element('select',{id:'deck'},Object.entries(DECKS).map(([value,label]) => element('option',{value},label)));
+    deck.value = state.settings.deck;
+    const impostors = element('select',{id:'impostors',disabled:count<3},Array.from({length:Math.max(1,maximum)},(_,index) => element('option',{value:index+1},index+1)));
+    impostors.value = state.settings.impostors;
+    const form = element('form',{id:'add-form'},element('label',{class:'field',for:'new-names'},'Agregar jugadores',element('textarea',{id:'new-names',placeholder:'Un nombre, o varios separados por comas',maxlength:1400,rows:2,autocomplete:'off'})),element('div',{class:'add-row'},paragraph('Enter para agregar · Shift + Enter para otra línea','hint'),button('Agregar','add-players',{class:'secondary',disabled:count>=20})));
+    return [eyebrow('Un celular · Cada persona por su cuenta'),element('h1',{},'¿Quién está improvisando?'),paragraph('Todos conocen una palabra. Los impostores, solamente una pista. Armen el grupo y empiecen a sospechar.','intro'),element('div',{class:'section-heading'},element('h2',{},'Jugadores'),element('span',{class:'counter'},`${count} / 20`)),list,form,element('p',{id:'form-error',class:'error',role:'alert',hidden:true}),element('section',{class:'panel','aria-label':'Opciones de la partida'},element('label',{class:'field',for:'deck'},'Mazo',deck),paragraph(`${remaining} de ${wordPool().length} palabras sin usar en este modo.`,'hint'),element('label',{class:'field',for:'impostors'},'Cantidad de impostores',impostors),paragraph(count<3?'Agregá al menos 3 jugadores.':`Para ${count} jugadores: de 1 a ${maximum} ${maximum===1?'impostor':'impostores'}. Siempre deben ser menos que los normales.`,'hint'),count===15?paragraph('Para un grupo de 15, pueden probar con 2 impostores. Vos elegís.','hint'):null,element('label',{class:'check'},element('input',{id:'last-chance',type:'checkbox',checked:state.settings.lastChance}),element('span',{},'Última oportunidad',element('span',{class:'hint',style:'display:block'},'El último impostor eliminado puede intentar adivinar la palabra una vez.')))),primary('Repartir los roles','begin',{disabled:count<3}),paragraph('Los roles se muestran de a uno. Pasen el celular con la pantalla tapada.','hint')];
+  }
+  function renderDeal() {
+    const game = state.game, player = state.players[game.dealIndex];
+    const body = element('div',{class:'private-body'});
+    if (privateVisible) {
+      const impostor = game.impostorIds.includes(player.id), word = WORD_BY_ID.get(game.wordId);
+      body.id = 'private-info';
+      body.append(paragraph(impostor?'Sos impostor':'Tu palabra es…','private-title'),paragraph(impostor?'Tu pista:':'Palabra secreta','private-prefix'),paragraph(impostor?word.hint:word.word,'private-value'));
+    } else body.append(paragraph('Asegurate de que nadie más mire la pantalla.','intro'));
+    return [element('div',{class:'stage'},element('span',{},'Reparto privado'),element('span',{},`${game.dealIndex+1} de ${state.players.length}`)),element('section',{class:'private-card'},element('div',{},eyebrow(privateVisible?'Solo para vos':'Pasale el celular a'),element('h1',{},player.name)),body,element('div',{},paragraph('Recordá la información. Después ocultá la pantalla antes de pasar el celular.','private-help'),privateVisible?primary('Ocultar y pasar','hide-role'):primary('Ver mi rol','show-role',{id:'reveal-role'})))];
+  }
+  function renderReady() {
+    return [eyebrow('Reparto completo'),element('section',{class:'hero-card'},element('h1',{},'Todos listos'),paragraph('La palabra y los roles ya están repartidos. A partir de ahora, el celular muestra solamente información pública.')),paragraph('Cada persona dice una palabra relacionada, sin decir la secreta ni dar explicaciones.','rule'),primary('Comenzar la primera ronda','start-round')];
+  }
+  function renderSpeaking() {
+    const game = state.game;
+    return [element('div',{class:'stage'},element('span',{},`Ronda ${game.round}`),element('span',{},`${activePlayers().length} en juego`)),element('section',{class:'hero-card'},eyebrow('Le toca hablar a'),element('h1',{},playerName(game.order[game.speakerIndex])),paragraph(`Persona ${game.speakerIndex+1} de ${game.order.length}`)),paragraph('Decí una sola palabra relacionada. Sin decir la palabra secreta, sin gestos ni explicaciones.','rule'),primary('Siguiente persona','next-speaker'),paragraph(game.speakerIndex+1===game.order.length?'Después de este turno, pasan a discutir y votar.':'Avancen cuando esta persona haya terminado.','hint')];
+  }
+  function renderVote() {
+    const game = state.game;
+    const list = element('ul',{class:'roster'},activePlayers().map(player => element('li',{},element('span',{class:'name'},player.name),button('Elegir','choose-elimination',{'data-player-id':player.id,'aria-label':`Elegir a ${player.name}`}))));
+    return [eyebrow(`Ronda ${game.round} · Votación presencial`),element('h1',{},'¿A quién van a eliminar?'),paragraph('Discutan y voten en voz alta. Cuando el grupo decida, elegí a esa persona. Los eliminados no votan.','intro'),game.tied?element('div',{class:'rule'},'Repitan la votación solamente entre quienes empataron. Si el empate sigue, pueden jugar otra ronda sin eliminar a nadie.'):null,list,actions(secondary('Hubo empate','tie'),game.tied?secondary('Continuar otra ronda sin eliminar','continue-tie'):null)];
+  }
+  function renderEliminated() {
+    const game = state.game, impostor = game.impostorIds.includes(game.lastEliminatedId);
+    return [eyebrow('Eliminación confirmada'),element('section',{class:'hero-card'},element('h1',{},playerName(game.lastEliminatedId)),paragraph(impostor?'Era impostor.':'Era un jugador normal.')),paragraph('Esta persona ya no participa de las rondas ni de las votaciones. La partida continúa.','rule'),primary('Comenzar la siguiente ronda','next-round')];
+  }
+  function renderLastChance() {
+    return [eyebrow('Última oportunidad'),element('h1',{},`${playerName(state.game.lastEliminatedId)} era el último impostor`),paragraph('Tiene un único intento: debe decir en voz alta cuál cree que es la palabra secreta.','intro'),paragraph('No le den pistas. Los impostores eliminados antes no pueden responder ni ayudar. La palabra se revelará al confirmar el resultado.','rule'),actions(primary('Acertó','guess-correct'),secondary('No acertó','guess-wrong')),paragraph('El grupo comprueba la respuesta. La app no escucha ni compara lo que se dice.','hint')];
+  }
+  function renderFinal() {
+    const game = state.game, word = WORD_BY_ID.get(game.wordId);
+    const reason = game.guessCorrect===true?'El último impostor acertó la palabra.':game.winner==='normals'?'Eliminaron a todos los impostores.':'Quedaron tantos impostores como jugadores normales, o más.';
+    return [eyebrow('Partida terminada'),element('h1',{},game.winner==='normals'?'Ganan los jugadores normales':'Ganan los impostores'),paragraph(reason,'intro'),element('section',{class:'panel','aria-label':'La palabra de la partida'},paragraph('Palabra secreta','final-label'),paragraph(word.word,'final-word'),paragraph(`Pista para impostores: ${word.hint}`,'hint')),element('h2',{},'Así se repartieron los roles'),element('ul',{class:'roster'},state.players.map(player=>element('li',{},element('span',{class:game.eliminated.includes(player.id)?'name out':'name'},player.name,game.eliminated.includes(player.id)?element('span',{class:'hint',style:'display:block'},'Eliminado'):null),element('span',{class:'role-tag'},game.impostorIds.includes(player.id)?'Impostor':'Normal')))),actions(primary('Otra partida con estos jugadores','another-game'),secondary('Cambiar jugadores','change-players'))];
+  }
+  function render(focus = true) {
+    renderNotice();
+    $('restart').hidden = !state.game || state.game.phase==='final';
+    const main = $('screen');
+    const renders = {deal:renderDeal,ready:renderReady,speaking:renderSpeaking,vote:renderVote,eliminated:renderEliminated,lastChance:renderLastChance,final:renderFinal};
+    main.replaceChildren(...(state.game ? renders[state.game.phase]() : renderConfig()));
+    if (focus) main.focus({preventScroll:true});
+  }
+  function confirmAction(title,text,label,callback,additional = null) {
+    maskPrivate();
+    const dialog = $('confirm-dialog');
+    if (dialog.open) dialog.close();
+    pendingConfirmation = callback;
+    dialog.replaceChildren(element('h2',{id:'confirm-title'},title),paragraph(text),actions(primary(label,'confirm'),additional,secondary('Cancelar','cancel-confirm')));
+    dialog.showModal();
+  }
+
+  // INPUT AND ACTIONS: guard successive taps; private reveals never enter live regions.
+  function addPlayers() {
+    if (state.game) return;
+    const input = $('new-names'), names = input.value.split(/[,\n]+/).map(name=>name.trim().replace(/\s+/g,' ')).filter(Boolean);
+    if (!names.length) { showError('Escribí al menos un nombre.'); input.focus(); return; }
+    if (names.some(name=>name.length>32)) { showError('Usá nombres de hasta 32 caracteres.'); return; }
+    if (state.players.length+names.length>20) { showError('Pueden jugar hasta 20 personas. Quitá algún nombre antes de agregar más.'); return; }
+    const keys = [...state.players.map(player=>nameKey(player.name)),...names.map(nameKey)];
+    if (new Set(keys).size !== keys.length) { showError('Hay nombres repetidos. Agregá una inicial o un apodo para distinguirlos.'); return; }
+    state.players.push(...names.map(name=>({id:`p-${crypto.randomUUID()}`,name})));
+    save(); render(false); $('new-names').focus();
+  }
+  function editPlayer(input) {
+    if (state.game) return;
+    const player = state.players.find(player=>player.id===input.dataset.playerId);
+    if (!player) return;
+    const name = input.value.trim().replace(/\s+/g,' ');
+    if (!name || name.length>32 || state.players.some(other=>other.id!==player.id&&nameKey(other.name)===nameKey(name))) {
+      input.value = player.name; showError('Cada persona necesita un nombre distinto, de 1 a 32 caracteres.'); return;
+    }
+    player.name = name; input.value = name; save();
+    const remove = input.parentElement.querySelector('button'); remove?.setAttribute('aria-label',`Quitar a ${name}`);
+    if ($('form-error')) $('form-error').hidden = true;
+  }
+  function handleAction(action,target) {
+    const game = state.game;
+    switch (action) {
+      case 'add-players': addPlayers(); break;
+      case 'remove-player':
+        if (game) break;
+        state.players = state.players.filter(player=>player.id!==target.dataset.playerId);
+        state.settings.impostors = Math.min(state.settings.impostors,Math.max(1,maxImpostors(state.players.length)));
+        save(); render(); break;
+      case 'begin': if (!game) beginGame(); break;
+      case 'show-role': if (game?.phase==='deal'&&!privateVisible) { privateVisible=true; render(); } break;
+      case 'hide-role':
+        if (game?.phase!=='deal'||!privateVisible) break;
+        privateVisible=false; game.dealIndex++; if (game.dealIndex===state.players.length) game.phase='ready'; save(); render(); break;
+      case 'start-round': if (game?.phase==='ready') startRound(); break;
+      case 'next-speaker': if (game) nextSpeaker(); break;
+      case 'choose-elimination': {
+        const id=target.dataset.playerId;
+        if (game?.phase!=='vote'||!activePlayers().some(player=>player.id===id)) break;
+        const gameId=game.id;
+        confirmAction(`¿Eliminar a ${playerName(id)}?`,'Confirmá solamente si esta fue la decisión del grupo. La eliminación no se puede deshacer.',`Eliminar a ${playerName(id)}`,()=>{if(state.game?.id===gameId)eliminate(id)}); break;
+      }
+      case 'tie': if (game?.phase==='vote') { game.tied=true; save(); render(); } break;
+      case 'continue-tie': if (game?.phase==='vote'&&game.tied) startRound(true); break;
+      case 'next-round': if (game?.phase==='eliminated') startRound(true); break;
+      case 'guess-correct': case 'guess-wrong': {
+        if (game?.phase!=='lastChance') break;
+        const correct=action==='guess-correct',gameId=game.id;
+        confirmAction(correct?'¿Confirmás que acertó?':'¿Confirmás que no acertó?',correct?'Si la respuesta fue correcta, ganan los impostores. Al confirmar se revela la palabra y termina la partida.':'Si la respuesta fue incorrecta, ganan los jugadores normales. Al confirmar se revela la palabra y termina la partida.',correct?'Sí, acertó':'Sí, no acertó',()=>{if(state.game?.id===gameId&&state.game.phase==='lastChance')finish(correct?'impostors':'normals',correct)}); break;
+      }
+      case 'another-game': if (game?.phase==='final') beginGame(); break;
+      case 'change-players': if (game?.phase==='final') clearGame(); break;
+      case 'restart':
+        if (!game || game.phase==='final') break;
+        confirmAction('¿Terminar esta partida?','Se termina el reparto actual. Su palabra queda marcada como usada. Podés volver a repartir o cambiar el grupo.','Volver a repartir',beginGame,secondary('Cambiar jugadores','confirm-change-players')); break;
+      case 'confirm-change-players': if ($('confirm-dialog').open) { pendingConfirmation=null; $('confirm-dialog').close(); clearGame(); } break;
+      case 'confirm': {
+        if (!$('confirm-dialog').open) break;
+        const callback=pendingConfirmation; pendingConfirmation=null; $('confirm-dialog').close(); callback?.(); break;
+      }
+      case 'cancel-confirm': pendingConfirmation=null; $('confirm-dialog').close(); break;
+      case 'help': maskPrivate(); $('help-dialog').showModal(); break;
+      case 'close-help': $('help-dialog').close(); break;
+    }
+  }
+  const guarded = new Set(['begin','show-role','hide-role','start-round','next-speaker','choose-elimination','tie','continue-tie','next-round','guess-correct','guess-wrong','another-game','change-players','restart','confirm','confirm-change-players']);
+  document.addEventListener('click',event=>{
+    const target=event.target.closest('button[data-action]');
+    if (!target || target.disabled) return;
+    const action=target.dataset.action;
+    if (guarded.has(action)) {
+      if (performance.now()<blockedUntil) return;
+      blockedUntil=performance.now()+450;
+    }
+    handleAction(action,target);
+  });
+  document.addEventListener('submit',event=>{if(event.target.id==='add-form'){event.preventDefault();addPlayers()}});
+  document.addEventListener('keydown',event=>{if(event.target.id==='new-names'&&event.key==='Enter'&&!event.shiftKey&&!event.isComposing){event.preventDefault();addPlayers()}});
+  document.addEventListener('change',event=>{
+    const input=event.target;
+    if (input.matches('[data-player-id].player-input')) { editPlayer(input); return; }
+    if (state.game) return;
+    if (input.id==='deck'&&Object.hasOwn(DECKS,input.value)) { state.settings.deck=input.value; save(); render(); }
+    if (input.id==='impostors') { const count=Number(input.value); if(Number.isInteger(count)&&count>=1&&count<=maxImpostors(state.players.length)){state.settings.impostors=count;save()} }
+    if (input.id==='last-chance') { state.settings.lastChance=input.checked; save(); }
+  });
+  $('confirm-dialog').addEventListener('cancel',()=>{pendingConfirmation=null});
+  document.addEventListener('visibilitychange',()=>{if(document.hidden)maskPrivate()});
+  window.addEventListener('blur',maskPrivate);
+  window.addEventListener('pagehide',maskPrivate);
+  window.addEventListener('pageshow',maskPrivate);
+  renderNotice(); render(false);
+  </script>
+</body>
+</html>
