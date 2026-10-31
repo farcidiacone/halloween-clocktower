@@ -63,7 +63,19 @@
     dl { margin:10px 0 0; font-size:14px; }
     dt { font-weight:650; margin-top:10px; }
     dd { margin:2px 0 0; color:#cfbfae; }
-    main { padding-bottom:max(16px,env(safe-area-inset-bottom)); }
+    main { padding-bottom:calc(120px + env(safe-area-inset-bottom)); }
+    .save-character { display:block; margin-top:16px; min-height:44px; padding:8px 12px; border:1px solid var(--line); border-radius:7px; background:transparent; color:var(--muted); font-size:13px; }
+    .private-dock { position:fixed; z-index:4; bottom:0; inset-inline:0; padding:10px 18px calc(10px + env(safe-area-inset-bottom)); background:var(--bg); border-top:1px solid var(--line); }
+    .private-actions { display:flex; gap:10px; width:min(100%,480px); margin:auto; }
+    .private-hold { flex:1; touch-action:none; user-select:none; -webkit-user-select:none; -webkit-touch-callout:none; }
+    .private-hold,.private-forget { min-height:48px; padding:10px 14px; border:1px solid var(--line); border-radius:8px; background:var(--panel); color:var(--ink); font-size:14px; }
+    .private-forget { color:var(--muted); }
+    .private-hint { margin:5px 0 0; text-align:center; color:var(--muted); font-size:11px; }
+    .private-panel { position:absolute; bottom:100%; left:50%; transform:translateX(-50%); width:min(calc(100% - 24px),480px); max-height:calc(100dvh - 150px); overflow:auto; padding:20px; background:var(--panel); border:1px solid var(--line); border-radius:10px 10px 0 0; box-shadow:0 -10px 40px #0008; }
+    .private-panel h2 { color:var(--ink); font-size:25px; margin-bottom:12px; }
+    .private-panel p { margin:0; font-size:16px; }
+    .private-panel .timing { color:var(--muted); }
+    @media print { .private-dock,.save-character { display:none !important; } }
     @media(max-width:620px) { .cards { grid-template-columns:1fr; } .hero { padding-top:27px; } .card { padding:18px; } .group { margin-top:25px; } }
     @media(max-width:360px) { .wrap { width:calc(100% - 28px); } .filter { padding-inline:10px; font-size:12px; } }
     @media(prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } }
@@ -147,6 +159,14 @@
       </dl></details>
     </aside>
   </main>
+  <aside class="private-dock" id="private-dock" aria-label="Consulta rápida" hidden>
+    <section class="private-panel" id="private-panel" aria-label="Consulta privada" hidden></section>
+    <div class="private-actions">
+      <button class="private-hold" id="private-hold" type="button" aria-controls="private-panel" aria-expanded="false" aria-describedby="private-hint">Consulta rápida</button>
+      <button class="private-forget" id="private-forget" type="button" aria-label="Borrar personaje guardado">Borrar</button>
+    </div>
+    <p class="private-hint" id="private-hint" role="status">Mantené presionado para consultar. Soltá para ocultar.</p>
+  </aside>
   <script>
     const search = document.querySelector('#search');
     const filters = [...document.querySelectorAll('[data-filter]')];
@@ -180,6 +200,122 @@
     document.querySelector('#reset').addEventListener('click', () => { search.value = ''; active = 'all'; update(); search.focus(); });
     document.querySelector('.filters').hidden = false;
     update();
+
+    const storageKey = 'clocktower.private-character.v1';
+    const hold = document.querySelector('#private-hold');
+    const panel = document.querySelector('#private-panel');
+    const hint = document.querySelector('#private-hint');
+    const defaultHint = hint.textContent;
+    const characters = entries.flatMap(entry => entry.cards).map(({card}) => ({
+      card, name:card.querySelector('h3').textContent,
+      ability:card.querySelector('p'), timing:card.querySelector('.timing')
+    }));
+    let saved = null;
+    let revealTimer;
+    let hintTimer;
+    let holdingPointer = null;
+    let holdingKey = null;
+
+    function hidePrivate() {
+      clearTimeout(revealTimer);
+      holdingPointer = null;
+      holdingKey = null;
+      panel.hidden = true;
+      panel.replaceChildren();
+      hold.setAttribute('aria-expanded', 'false');
+    }
+    function notice(message) {
+      clearTimeout(hintTimer);
+      hint.textContent = message;
+      hintTimer = setTimeout(() => { hint.textContent = defaultHint; }, 3500);
+    }
+    function persistSelection() {
+      try {
+        if (saved) localStorage.setItem(storageKey, saved.name);
+        else localStorage.removeItem(storageKey);
+        return true;
+      } catch { return false; }
+    }
+    function beginReveal() {
+      clearTimeout(revealTimer);
+      revealTimer = setTimeout(() => {
+        if (document.visibilityState !== 'visible' || !document.hasFocus()) return;
+        if (saved) {
+          const title = document.createElement('h2');
+          title.textContent = saved.name;
+          panel.replaceChildren(title, saved.ability.cloneNode(true), saved.timing.cloneNode(true));
+        } else {
+          const message = document.createElement('p');
+          message.textContent = 'Primero usá “Guardar para consulta” en la tarjeta de tu personaje.';
+          panel.replaceChildren(message);
+        }
+        panel.hidden = false;
+        hold.setAttribute('aria-expanded', 'true');
+      }, 250);
+    }
+    try {
+      const name = localStorage.getItem(storageKey);
+      saved = characters.find(character => character.name === name) || null;
+    } catch { /* La consulta sigue funcionando sin almacenamiento disponible. */ }
+    characters.forEach(character => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'save-character';
+      button.textContent = 'Guardar para consulta';
+      button.setAttribute('aria-label', `Guardar ${character.name} para consulta privada`);
+      button.addEventListener('click', () => {
+        hidePrivate();
+        saved = character;
+        const persisted = persistSelection();
+        search.value = '';
+        active = 'all';
+        update();
+        hold.focus({preventScroll:true});
+        window.scrollTo({top:0, behavior:'instant'});
+        notice(persisted ? 'Guardado en este navegador. Mantené presionado para consultar.' : 'Guardado solo hasta que cierres o recargues esta página.');
+      });
+      character.card.append(button);
+    });
+    hold.addEventListener('pointerdown', event => {
+      if (!event.isPrimary || event.button !== 0) { hidePrivate(); return; }
+      hidePrivate();
+      holdingPointer = event.pointerId;
+      hold.setPointerCapture(event.pointerId);
+      beginReveal();
+    });
+    hold.addEventListener('pointermove', event => {
+      if (event.pointerId !== holdingPointer) return;
+      const bounds = hold.getBoundingClientRect();
+      if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) hidePrivate();
+    });
+    ['pointerup', 'pointercancel', 'lostpointercapture'].forEach(type => hold.addEventListener(type, hidePrivate));
+    hold.addEventListener('contextmenu', event => event.preventDefault());
+    hold.addEventListener('keydown', event => {
+      if (event.key !== ' ' && event.key !== 'Enter') return;
+      event.preventDefault();
+      if (event.repeat || holdingKey || holdingPointer !== null) return;
+      holdingKey = event.key;
+      beginReveal();
+    });
+    hold.addEventListener('keyup', event => {
+      if (event.key === ' ' || event.key === 'Enter') { event.preventDefault(); hidePrivate(); }
+    });
+    hold.addEventListener('blur', hidePrivate);
+    document.querySelector('#private-forget').addEventListener('click', () => {
+      hidePrivate();
+      saved = null;
+      notice(persistSelection() ? 'Personaje guardado borrado.' : 'Selección borrada de esta página. No se pudo acceder al almacenamiento del navegador.');
+    });
+    document.addEventListener('keydown', event => { if (event.key === 'Escape') hidePrivate(); });
+    document.addEventListener('visibilitychange', hidePrivate);
+    document.addEventListener('freeze', hidePrivate);
+    ['blur', 'pagehide', 'pageshow', 'beforeprint'].forEach(type => window.addEventListener(type, hidePrivate));
+    window.addEventListener('storage', event => {
+      if (event.key !== storageKey && event.key !== null) return;
+      hidePrivate();
+      saved = characters.find(character => character.name === event.newValue) || null;
+    });
+    document.querySelector('#private-dock').hidden = false;
   </script>
 </body>
 </html>
