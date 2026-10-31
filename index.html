@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#151315">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23151315'/%3E%3Ctext x='32' y='46' text-anchor='middle' font-size='44' fill='%23e6b87b'%3E%E2%9C%A6%3C/text%3E%3C/svg%3E">
+  <meta name="description" content="Los 22 personajes de Trouble Brewing. Nombres originales y habilidades en español para consultar durante la partida.">
+  <title>Trouble Brewing · Guía de personajes</title>
+  <style>
+    :root { color-scheme: dark; --bg:#151315; --panel:#211e21; --ink:#f3eade; --muted:#beb3a8; --line:#393135; --gold:#e6b87b; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; scroll-padding-top:220px; }
+    body { margin:0; background:var(--bg); color:var(--ink); font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; line-height:1.65; -webkit-text-size-adjust:100%; }
+    button,input { font:inherit; }
+    button { cursor:pointer; }
+    button:focus-visible,a:focus-visible,input:focus-visible,summary:focus-visible { outline:3px solid var(--gold); outline-offset:4px; }
+    [hidden] { display:none !important; }
+    .wrap { width:min(100% - 36px,960px); margin-inline:auto; }
+    .hero { padding:36px 0 26px; background:radial-gradient(ellipse at 50% 0%,#49302b66,transparent 75%); text-align:center; }
+    .brand { display:flex; justify-content:center; align-items:center; gap:10px; color:var(--gold); font-size:10px; font-weight:700; letter-spacing:.19em; text-transform:uppercase; }
+    .brand svg { width:25px; height:32px; flex-shrink:0; }
+    .eyebrow { margin:22px 0 5px; color:var(--muted); text-transform:uppercase; font-size:10px; letter-spacing:.24em; }
+    h1 { margin:0; font:normal clamp(38px,8vw,62px)/1.12 Georgia,"Times New Roman",serif; letter-spacing:-.045em; }
+    h1 span { color:var(--gold); }
+    .subtitle { margin:14px 0 0; font-size:14px; color:var(--muted); }
+    .ornament { display:flex; align-items:center; justify-content:center; gap:12px; margin:20px auto 0; color:var(--gold); font-size:11px; }
+    .ornament::before,.ornament::after { content:""; width:54px; height:1px; background:#725642; }
+    .tools { position:sticky; top:0; z-index:2; padding:14px 0 12px; background:#151315f7; border-block:1px solid var(--line); }
+    .search { display:flex; gap:10px; align-items:center; border:1px solid #57474b; border-radius:9px; background:#211e21; padding:0 13px; }
+    .search svg { width:19px; height:19px; color:var(--muted); flex-shrink:0; }
+    input { width:100%; min-width:0; height:48px; border:0; background:transparent; color:var(--ink); font-size:16px; }
+    input::placeholder { color:#b0a4a0; opacity:1; }
+    .clear { border:0; background:transparent; color:var(--muted); min-width:44px; min-height:44px; font-size:23px; }
+    .filters { display:flex; gap:7px; flex-wrap:wrap; margin-top:11px; }
+    .filter { min-height:44px; padding:8px 12px; border:1px solid var(--line); border-radius:7px; color:#cfc2b9; background:transparent; font-size:13px; line-height:1.2; }
+    .filter[aria-pressed="true"] { background:var(--gold); border-color:var(--gold); color:#251b15; font-weight:700; }
+    .status { margin:19px 0 0; color:var(--muted); font-size:12px; letter-spacing:.025em; }
+    .group { margin-top:28px; --accent:#8dbbdf; --tint:#23313d; }
+    .group[data-type="outsider"] { --accent:#a6b7ed; --tint:#292d44; }
+    .group[data-type="minion"] { --accent:#f0ac88; --tint:#3d2923; }
+    .group[data-type="demon"] { --accent:#ee9aa9; --tint:#3d252f; }
+    .group-heading { display:flex; align-items:center; gap:11px; padding-bottom:12px; border-bottom:1px solid var(--line); margin-bottom:14px; }
+    .group-heading::before { content:""; width:3px; height:31px; background:var(--accent); border-radius:2px; }
+    h2 { margin:0; font:normal 25px/1.2 Georgia,serif; }
+    .team { font-size:11px; color:var(--accent); }
+    .total { margin-left:auto; color:var(--muted); font:normal 23px Georgia,serif; }
+    .cards { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+    .card { background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:19px 20px; }
+    .card-top { display:flex; gap:10px; align-items:center; margin-bottom:10px; }
+    .sigil { display:grid; place-items:center; flex-shrink:0; width:29px; height:29px; border-radius:50%; border:1px solid color-mix(in srgb,var(--accent) 35%,transparent); background:var(--tint); color:var(--accent); font:italic 17px Georgia,serif; }
+    h3 { margin:0; font:normal 23px/1.2 Georgia,serif; color:var(--accent); overflow-wrap:anywhere; }
+    .card p { margin:0; font-size:16px; line-height:1.65; }
+    .card strong { font-weight:650; color:#fff4e7; }
+    .timing { margin-top:15px; display:inline-block; padding:3px 8px; border:1px solid var(--line); border-radius:4px; color:var(--muted); font-size:11px; }
+    .empty { text-align:center; padding:45px 12px; }
+    .empty p { color:var(--muted); }
+    .reset { background:var(--gold); color:#251b15; border:0; padding:12px 18px; border-radius:7px; min-height:44px; }
+    .notes { margin:32px 0; border:1px solid #574739; background:#251f1c; border-radius:9px; padding:16px 18px; }
+    .notes>p { margin:0; font-size:14px; color:#e0c9ac; }
+    details { border-top:1px solid #504235; margin-top:14px; padding-top:12px; }
+    summary { min-height:44px; align-content:center; font-size:14px; cursor:pointer; color:var(--gold); }
+    dl { margin:10px 0 0; font-size:14px; }
+    dt { font-weight:650; margin-top:10px; }
+    dd { margin:2px 0 0; color:#cfbfae; }
+    footer { padding:0 0 max(30px,env(safe-area-inset-bottom)); text-align:center; color:var(--muted); font-size:11px; }
+    footer p { margin:5px 0; }
+    footer a { color:var(--gold); text-underline-offset:3px; }
+    @media(max-width:620px) { .cards { grid-template-columns:1fr; } .hero { padding-top:27px; } .card { padding:18px; } .group { margin-top:25px; } }
+    @media(max-width:360px) { .wrap { width:calc(100% - 28px); } .filter { padding-inline:10px; font-size:12px; } }
+    @media(prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } }
+    @media print { :root { color-scheme:light; --bg:white; --panel:white; --ink:black; --muted:#444; --line:#ccc; } .tools,.hero svg,.sigil,.timing { display:none; } .card,.notes { break-inside:avoid; } .card strong,h3,.team { color:black; } .cards { grid-template-columns:1fr 1fr; } }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap">
+      <div class="brand"><svg viewBox="0 0 30 40" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M4 38h22M7 38V17h16v21M5 17 15 2l10 15ZM12 3h6M12 33v5h6v-5"/><circle cx="15" cy="23" r="5"/><path d="M15 19v4l3 2"/></svg>Blood on the Clocktower</div>
+      <p class="eyebrow">Tu guía durante la partida</p>
+      <h1>Trouble <span>Brewing</span></h1>
+      <p class="subtitle">22 personajes. Un pueblo. Muchas sospechas.</p>
+      <div class="ornament" aria-hidden="true">✦</div>
+    </div>
+  </header>
+  <div class="tools" role="search" aria-label="Buscar personajes">
+    <div class="wrap">
+      <label class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="10" cy="10" r="6.5"/><path d="m15 15 6 6"/></svg><input id="search" type="search" placeholder="Buscá un personaje o una habilidad…" aria-label="Buscar por nombre o habilidad" autocomplete="off" spellcheck="false"><button class="clear" id="clear" type="button" aria-label="Borrar búsqueda" hidden>×</button></label>
+      <nav class="filters" aria-label="Filtrar por tipo de personaje" hidden>
+        <button class="filter" type="button" data-filter="all" aria-pressed="true">Todos</button>
+        <button class="filter" type="button" data-filter="townsfolk" aria-pressed="false">Aldeanos</button>
+        <button class="filter" type="button" data-filter="outsider" aria-pressed="false">Forasteros</button>
+        <button class="filter" type="button" data-filter="minion" aria-pressed="false">Esbirros</button>
+        <button class="filter" type="button" data-filter="demon" aria-pressed="false">Demonio</button>
+      </nav>
+    </div>
+  </div>
+  <main class="wrap" id="characters">
+    <p class="status" id="status" role="status" aria-live="polite" aria-atomic="true">22 personajes · Nombres originales, habilidades en español</p>
+    <section class="group" data-type="townsfolk" aria-labelledby="townsfolk-title">
+      <div class="group-heading"><div><h2 id="townsfolk-title">Aldeanos</h2><span class="team">Townsfolk · Equipo del bien</span></div><span class="total" aria-label="13 personajes">13</span></div>
+      <div class="cards">
+        <article class="card"><div class="card-top"><span class="sigil" aria-hidden="true">W</span><h3>Washerwoman</h3></div><p>Al comenzar, sabés que <strong>uno de dos jugadores</strong> es un Aldeano específico.</p><span class="timing">Al comenzar</span></article>
+        <article class="card"><div class="card-top"><span class="sigil" aria-hidden="true">L</span><h3>Librarian</h3></div><p>Al comenzar, sabés que <strong>uno de dos jugadores</strong> es un Forastero específico, o que no hay Forasteros en juego.</p><span class="timing">Al comenzar</span></article>
+        <article class="card"><div class="card-top"><span class="sigil" aria-hidden="true">I</span><h3>Investigator</h3></div><p>Al comenzar, sabés que <strong>uno de dos jugadores</strong> es un Esbirro específico.</p><span class="timing">Al comenzar</span></article>
+        <article class="card"><div class="card-top"><span class="sigil" aria-hidden="true">C</span><h3>Chef</h3></div><p>Al comenzar, sabés cuántos <strong>pares de jugadores malvados sentados uno al lado del otro</strong> hay.</p><span class="timing">Al comenzar</span></article>
+        <article class="card"><div class="card-top"><span class="sigil" aria-hidden="true">E</span><h3>Empath</h3></div><p>Cada noche, sabés cuántos de tus <strong>dos vecinos vivos</strong> son malvados.</p><span class="timing">Cada noche</span></article>
+        <article class="card"><div class="card-top"><span class="sigil" aria-hidden="true">F</span><h3>Fortune Teller</h3></div><p>Cada noche, elegí dos jugadores: sabés si <strong>alguno de ellos es un Demonio</strong>. Hay un jugador bueno que aparece como Demonio para vos.</p><span class="timing">Cada noche</span></article>
+        <article class="card"><div class="card-top"><span class="sigil" aria-hidden="true">U</span><h3>Undertaker</h3></div><p>Cada noche*, sabés qué personaje tenía el jugador que <strong>murió por ejecución durante ese día</strong>.</p><span class="timing">Cada noche* · Excepto la primera</span></article>
+        <article class="card"><div class="card-top"><span class="sigil" aria-hidden="true">M</span><h3>Monk</h3></div><p>Cada noche*, elegí un jugador que no seas vos: esa noche queda <strong>a salvo del Demonio</strong>.</p><span class="timing">Cada noche* · Excepto la primera</span></article>
+        <article class="card"><div class="card-top"><span class="sigil" aria-hidden="true">R</span><h3>Ravenkeeper</h3></div><p>Si <strong>morís de noche</strong>, te despiertan para elegir un jugador: descubrís qué personaje tiene.</p><span class="timing">Al morir de noche</span></article>
+        <article class="card"><div class="card-top"><span class="sigil" aria-hidden="true">V</span><h3>Virgin</h3></div><p>La <strong>primera vez que te nominan</strong>, si quien te nominó es un Aldeano, esa persona es ejecutada inmediatamente.</p><span class="timing">Primera nominación</span></article>
+        <article class="card"><div class="card-top"><span class="sigil" aria-hidden="true">S</span><h3>Slayer</h3></div><p><strong>Una vez por partida, durante el día</strong>, elegí públicamente un jugador: si es el Demonio, muere.</p><span class="timing">Una vez por partida · De día</span></article>
+        <article class="card"><div class="card-top"><span class="sigil" aria-hidden="true">S</span><h3>Soldier</h3></div><p>Estás <strong>a salvo del Demonio</strong>.</p><span class="timing">Siempre</span></article>
+        <article class="card"><div class="card-top"><span class="sigil" aria-hidden="true">M</span><h3>Mayor</h3></div><p>Si solo quedan <strong>tres jugadores vivos y no hay ejecución</strong>, tu equipo gana. Si morís de noche, otro jugador podría morir en tu lugar.</p><span class="timing">Final del día / De noche</span></article>
+      </div>
+    </section>
+    <section class="group" data-type="outsider" aria-labelledby="outsider-title">
+      <div class="group-heading"><div><h2 id="outsider-title">Forasteros</h2><span class="team">Outsiders · Equipo del bien</span></div><span class="total" aria-label="4 personajes">4</span></div>
+      <div class="cards">
+        <article class="card"><div class="card-top"><span class="sigil" aria-hidden="true">B</span><h3>Butler</h3></div><p>Cada noche, elegí un jugador que no seas vos: al día siguiente, <strong>solo podés votar si esa persona también está votando</strong>.</p><span class="timing">Cada noche</span></article>
+        <article class="card"><div class="card-top"><span class="sigil" aria-hidden="true">D</span><h3>Drunk</h3></div><p><strong>No sabés que sos el Drunk.</strong> Creés que sos un personaje Aldeano, pero no lo sos.</p><span class="timing">Siempre</span></article>
+        <article class="card"><div class="card-top"><span class="sigil" aria-hidden="true">R</span><h3>Recluse</h3></div><p>Podrías <strong>aparecer como malvado y como un Esbirro o Demonio</strong>, incluso si estás muerto.</p><span class="timing">Incluso después de morir</span></article>
+        <article class="card"><div class="card-top"><span class="sigil" aria-hidden="true">S</span><h3>Saint</h3></div><p>Si <strong>morís por ejecución</strong>, tu equipo pierde.</p><span class="timing">Al morir por ejecución</span></article>
+      </div>
+    </section>
+    <section class="group" data-type="minion" aria-labelledby="minion-title">
+      <div class="group-heading"><div><h2 id="minion-title">Esbirros</h2><span class="team">Minions · Equipo del mal</span></div><span class="total" aria-label="4 personajes">4</span></div>
+      <div class="cards">
+        <article class="card"><div class="card-top"><span class="sigil" aria-hidden="true">P</span><h3>Poisoner</h3></div><p>Cada noche, elegí un jugador: queda <strong>envenenado esa noche y durante el día siguiente</strong>.</p><span class="timing">Cada noche</span></article>
+        <article class="card"><div class="card-top"><span class="sigil" aria-hidden="true">S</span><h3>Spy</h3></div><p>Cada noche, ves el <strong>Grimorio</strong>. Podrías aparecer como bueno y como un Aldeano o Forastero, incluso si estás muerto.</p><span class="timing">Cada noche</span></article>
+        <article class="card"><div class="card-top"><span class="sigil" aria-hidden="true">B</span><h3>Baron</h3></div><p>Hay <strong>dos Forasteros adicionales</strong> en juego. [+2 Forasteros]</p><span class="timing">Preparación de la partida</span></article>
+        <article class="card"><div class="card-top"><span class="sigil" aria-hidden="true">S</span><h3>Scarlet Woman</h3></div><p>Si hay <strong>cinco o más jugadores vivos</strong> y el Demonio muere, te convertís en el Demonio. Los Viajeros no cuentan.</p><span class="timing">Cuando muere el Demonio</span></article>
+      </div>
+    </section>
+    <section class="group" data-type="demon" aria-labelledby="demon-title">
+      <div class="group-heading"><div><h2 id="demon-title">Demonio</h2><span class="team">Demon · Equipo del mal</span></div><span class="total" aria-label="1 personaje">1</span></div>
+      <div class="cards">
+        <article class="card"><div class="card-top"><span class="sigil" aria-hidden="true">I</span><h3>Imp</h3></div><p>Cada noche*, elegí un jugador: <strong>muere</strong>. Si te matás a vos mismo de esta manera, un Esbirro se convierte en el Imp.</p><span class="timing">Cada noche* · Excepto la primera</span></article>
+      </div>
+    </section>
+    <div class="empty" id="empty" hidden><h2>No encontramos personajes</h2><p>Probá otro nombre, habilidad o categoría.</p><button class="reset" type="button" id="reset">Ver todos los personajes</button></div>
+    <aside class="notes" aria-label="Notas de la hoja">
+      <p><strong>* Excepto la primera noche.</strong> Las habilidades marcadas con asterisco no se activan esa primera noche.</p>
+      <details><summary>Algunos términos para jugar</summary><dl>
+        <dt>Aparecer como…</dt><dd>Una habilidad puede detectar a alguien como un personaje o equipo distinto del que realmente tiene.</dd>
+        <dt>Grimorio</dt><dd>El registro del narrador con los personajes y el estado de la partida.</dd>
+        <dt>Envenenado / Borracho</dt><dd>Tu habilidad no funciona, pero no te avisan. La información que recibís puede ser falsa.</dd>
+        <dt>Vecinos vivos</dt><dd>Los jugadores vivos más cercanos a tu izquierda y a tu derecha, saltando a los muertos.</dd>
+      </dl></details>
+    </aside>
+  </main>
+  <footer class="wrap"><p>Una guía para tener a mano. Y desconfiar de todos.</p><p>Traducción no oficial de la hoja Trouble Brewing.</p><p>Blood on the Clocktower · The Pandemonium Institute</p><p><a href="#">Volver arriba ↑</a></p></footer>
+  <script>
+    const search = document.querySelector('#search');
+    const filters = [...document.querySelectorAll('[data-filter]')];
+    const groups = [...document.querySelectorAll('.group')];
+    const clear = document.querySelector('#clear');
+    const normalize = text => text.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+    const entries = groups.map(group => ({group, cards:[...group.querySelectorAll('.card')].map(card => ({card, text:normalize(card.textContent)}))}));
+    let active = 'all';
+    function update() {
+      const query = normalize(search.value.trim());
+      let count = 0;
+      for (const {group, cards} of entries) {
+        let visible = 0;
+        for (const {card, text} of cards) {
+          card.hidden = !((active === 'all' || group.dataset.type === active) && text.includes(query));
+          if (!card.hidden) visible++;
+        }
+        group.hidden = visible === 0;
+        group.querySelector('.total').textContent = visible;
+        group.querySelector('.total').setAttribute('aria-label', `${visible} ${visible === 1 ? 'personaje' : 'personajes'}`);
+        count += visible;
+      }
+      filters.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.filter === active)));
+      clear.hidden = search.value.length === 0;
+      document.querySelector('#empty').hidden = count > 0;
+      document.querySelector('#status').textContent = `${count} ${count === 1 ? 'personaje' : 'personajes'}${count === 22 ? ' · Nombres originales, habilidades en español' : ' de 22'}`;
+    }
+    search.addEventListener('input', update);
+    clear.addEventListener('click', () => { search.value = ''; update(); search.focus(); });
+    filters.forEach(button => button.addEventListener('click', () => { active = button.dataset.filter; update(); }));
+    document.querySelector('#reset').addEventListener('click', () => { search.value = ''; active = 'all'; update(); search.focus(); });
+    document.querySelector('.filters').hidden = false;
+    update();
+  </script>
+</body>
+</html>
