@@ -190,5 +190,5 @@ for(const prefix of ['setup','settings']){$(`${prefix}-add`).addEventListener('c
 $('settings-open').addEventListener('click',()=>{settingsDraft=state.teams.map(t=>({...t}));renderEditor('settings');$('settings').showModal()});$('settings-close').addEventListener('click',()=>$('settings').close());
 $('help-open').addEventListener('click',()=>$('help').showModal());$('help-close').addEventListener('click',()=>$('help').close());
 $('reset-open').addEventListener('click',()=>$('reset-dialog').showModal());$('reset-cancel').addEventListener('click',()=>$('reset-dialog').close());$('reset-confirm').addEventListener('click',()=>{clearInterval(timer);timer=null;setupDraft=state.teams.map(t=>({...t,score:0}));state=fresh();save();$('reset-dialog').close();renderEditor('setup');render();$('setup-name-0').focus();announce('Preparación de una nueva partida.')});
-renderEditor('setup');if(state.teams.length>=2&&state.current===null&&state.phase!=='finished')draw();else{render();if(state.teams.length>=2)revealTeam()}
+renderEditor('setup');if(state.teams.length>=2&&state.current===null&&(state.phase!=='finished'||pool().some(c=>!state.used.includes(c.id))))draw();else{render();if(state.teams.length>=2)revealTeam()}
 </script></body></html>
