@@ -25,29 +25,120 @@
 </section>
 </main></div>
 <p class="live" id="live" role="status" aria-live="polite" aria-atomic="true"></p>
-<dialog id="help"><h2>El objetivo es coincidir.</h2><ol><li>Armen <strong>dos o más equipos</strong>, con al menos dos personas en cada uno.</li><li>El equipo de turno lee la consigna, <strong>sin darse pistas ni ponerse de acuerdo</strong>.</li><li>Activen la cuenta regresiva. Después del 3, 2, 1, todos los del equipo <strong>responden al mismo tiempo</strong>.</li><li>Si todos dijeron lo mismo, suman <strong>un punto</strong>. Después juega el siguiente equipo.</li></ol><p>No hay una respuesta correcta guardada: importa que coincidan. En las frases completen el espacio; en las otras cartas respondan con una palabra o un nombre.</p><p>Acuerden hasta cuántos puntos jugar. Las cartas no se repiten hasta agotar el mazo. La partida se guarda en este navegador.</p><div class="modal-actions"><button class="primary" id="help-close">Entendido</button></div></dialog>
+<dialog id="help"><h2>El objetivo es coincidir.</h2><ol><li>Armen <strong>dos o más equipos</strong>, con al menos dos personas en cada uno.</li><li>El equipo de turno lee la consigna, <strong>sin darse pistas ni ponerse de acuerdo</strong>.</li><li>Activen la cuenta regresiva. Después del 3, 2, 1, todos los del equipo <strong>responden al mismo tiempo</strong>.</li><li>Si todos dijeron lo mismo, suman <strong>un punto</strong>. Después juega el siguiente equipo.</li></ol><p>No hay una respuesta correcta guardada: importa que coincidan. En las frases completen el espacio; en las otras cartas respondan con una palabra o un nombre.</p><p>Acuerden hasta cuántos puntos jugar. Cada carta se elige al azar entre las que todavía no salieron en el mazo seleccionado. No se repiten hasta agotarlo, aunque recarguen la página. La partida se guarda en este navegador.</p><div class="modal-actions"><button class="primary" id="help-close">Entendido</button></div></dialog>
 <dialog id="settings"><h2>Editar equipos</h2><p>Los equipos que conservan mantienen sus puntos. Si quitan un equipo, se elimina su puntaje.</p><form id="settings-form"><div class="editor-list" id="settings-list"></div><button class="add" type="button" id="settings-add">+ Agregar equipo</button><div class="modal-actions"><button class="primary" type="submit">Guardar equipos</button><button class="secondary" type="button" id="settings-close">Cancelar</button></div></form></dialog>
 <dialog id="reset-dialog"><h2>¿Empezar de nuevo?</h2><p>Se reinician los puntos y las cartas. Pueden volver a elegir los nombres y la cantidad de equipos.</p><div class="modal-actions"><button class="primary" id="reset-confirm">Empezar de nuevo</button><button class="secondary" id="reset-cancel">Seguir jugando</button></div></dialog>
 <script>const decks = {
   phrase: [
     'Palito, bombón, ___','Al mal tiempo, buena ___','Más vale tarde que ___','A caballo regalado no se le miran los ___','Camarón que se duerme se lo lleva la ___','En casa de herrero, cuchillo de ___','No hay dos sin ___','Ojos que no ven, corazón que no ___','El que no corre, ___','Cría cuervos y te sacarán los ___',
     'Dime con quién andas y te diré quién ___','Perro que ladra no ___','A buen entendedor, pocas ___','De tal palo, tal ___','Más vale pájaro en mano que cien ___','El que ríe último ríe ___','Cuando el gato no está, los ratones ___','No por mucho madrugar amanece más ___','Donde hubo fuego, cenizas ___','Las apariencias ___',
-    'El que mucho abarca, poco ___','Barriga llena, corazón ___','Lo barato sale ___','Al pan, pan; y al vino, ___','A falta de pan, buenas son las ___','Agua que no has de beber, dejala ___','No todo lo que brilla es ___','El que se fue a Sevilla perdió su ___','En boca cerrada no entran ___','Hierba mala nunca ___'
+    'El que mucho abarca, poco ___','Barriga llena, corazón ___','Lo barato sale ___','Al pan, pan; y al vino, ___','A falta de pan, buenas son las ___','Agua que no has de beber, dejala ___','No todo lo que brilla es ___','El que se fue a Sevilla perdió su ___','En boca cerrada no entran ___','Hierba mala nunca ___',
+    'Más vale prevenir que ___',
+    'No dejes para mañana lo que podés hacer ___',
+    'Del dicho al hecho hay mucho ___',
+    'A palabras necias, oídos ___',
+    'La unión hace la ___',
+    'Todos los caminos conducen a ___',
+    'Un clavo saca otro ___',
+    'La curiosidad mató al ___',
+    'El que busca, ___',
+    'No hay mal que por bien no ___',
+    'El que calla, ___',
+    'La esperanza es lo último que se ___',
+    'El tiempo es ___',
+    'Una imagen vale más que mil ___',
+    'Pan para hoy, hambre para ___',
+    'Piedra, papel o ___',
+    'Blanco y ___',
+    'Sal y ___',
+    'Café con ___',
+    'Luna de ___',
+    'Fin de ___',
+    'Cepillo de ___',
+    'Papel y ___',
+    'Tenedor y ___',
+    'Cuento de ___',
+    'Máquina de ___',
+    'Pelota de ___',
+    'Llave de ___',
+    'Carta de ___',
+    'Juego de ___'
   ],
   everyday: [
     'Un gusto de helado','Algo que llevás a un picnic','Una comida para compartir','Una golosina','Un lugar para ir de vacaciones','Un ingrediente de pizza','Una comida de domingo','Un recuerdo de la escuela','Un juego de mesa','Algo que tomás en el desayuno',
     'Una banda de música','Una marca de galletitas','Un personaje de dibujos animados','Un plan para un día de lluvia','Algo que comprás en una panadería','Un postre','Una excusa para llegar tarde','Una serie de televisión','Un juego del recreo','Algo que comprás en un supermercado',
-    'Una bebida sin alcohol','Un dibujo animado de la infancia','Algo que gritás mirando un partido','Una comida para pedir a domicilio','Algo que no puede faltar en un cumpleaños','Algo que llevás a la playa','Un personaje de película','Algo que siempre hay en una reunión de amigos','Un lugar para una primera cita','Un regalo de último momento'
+    'Una bebida sin alcohol','Un dibujo animado de la infancia','Algo que gritás mirando un partido','Una comida para pedir a domicilio','Algo que no puede faltar en un cumpleaños','Algo que llevás a la playa','Un personaje de película','Algo que siempre hay en una reunión de amigos','Un lugar para una primera cita','Un regalo de último momento',
+    'Una aplicación que usás todos los días',
+    'Algo que revisás antes de salir de casa',
+    'Una tarea de la casa que siempre postergás',
+    'Algo que guardás en el cajón de la mesa de luz',
+    'Un plan para un viernes a la noche',
+    'Algo que llevás en un viaje largo',
+    'Una compra que hacés por impulso',
+    'Algo que se termina cuando más lo necesitás',
+    'Un motivo para pedir comida en lugar de cocinar',
+    'Algo que encontrás al ordenar un armario',
+    'Una cosa que pedís prestada',
+    'Algo que hacés mientras esperás en una fila',
+    'Un regalo para alguien que no conocés mucho',
+    'Algo que llevás a una cena con amigos',
+    'Una comida que queda mejor al día siguiente',
+    'Un objeto que usás para trabajar o estudiar',
+    'Algo que buscás en internet antes de comprar',
+    'Una cosa que te ayuda a despertarte',
+    'Un plan que suele cancelarse por la lluvia',
+    'Algo que comprás para una casa nueva',
+    'Una cosa que nunca sabés dónde guardar',
+    'Algo que hacés para pasar el tiempo en un viaje',
+    'Una comida que preparás cuando tenés poco tiempo',
+    'Un lugar donde quedás con alguien para encontrarse',
+    'Algo que no puede faltar en una valija',
+    'Un motivo para poner una alarma',
+    'Algo que suele quedar en la mesa después de comer',
+    'Una compra que siempre te olvidás de hacer',
+    'Un lugar donde la gente suele perder cosas',
+    'Una actividad para hacer un domingo a la tarde'
   ],
   association: [
     'Decí una fruta','Decí un superhéroe','Decí algo rojo','Decí un animal de granja','Decí algo que dé miedo','Decí una película de terror','Decí un objeto que haya en una cocina','Decí algo que llevás en el bolsillo','Decí un animal que vuele','Decí una profesión',
     'Decí algo que se derrita','Decí una bebida para el verano','Decí algo que haya en un cumpleaños','Decí un disfraz de Halloween','Decí un instrumento musical','Decí algo que hacés cuando llueve','Decí algo que se pierde fácil','Decí una comida que se coma con la mano','Decí algo que haya en una plaza','Decí algo que comprás en una farmacia',
-    'Decí un deporte sin pelota','Decí algo que se enchufe','Decí algo que dé suerte','Decí algo que haga ruido de noche','Decí un villano de película','Decí algo que te olvidás al salir','Decí un olor rico','Decí algo que se pueda romper en una fiesta','Decí algo que haya en una heladera','Decí algo que harías si ganaras la lotería'
+    'Decí un deporte sin pelota','Decí algo que se enchufe','Decí algo que dé suerte','Decí algo que haga ruido de noche','Decí un villano de película','Decí algo que te olvidás al salir','Decí un olor rico','Decí algo que se pueda romper en una fiesta','Decí algo que haya en una heladera','Decí algo que harías si ganaras la lotería',
+    'Decí un animal del mar',
+    'Decí algo amarillo',
+    'Decí algo que sea redondo',
+    'Decí algo que se use en invierno',
+    'Decí un objeto de madera',
+    'Decí algo que se pueda inflar',
+    'Decí algo que tenga ruedas',
+    'Decí una cosa que se pueda doblar',
+    'Decí algo que se use de a pares',
+    'Decí algo que sea transparente',
+    'Decí una cosa que se pueda coleccionar',
+    'Decí un animal que viva en el desierto',
+    'Decí algo que vuele sin ser un animal',
+    'Decí un objeto que sirva para medir',
+    'Decí algo que se pueda atar',
+    'Decí un lugar donde haya que hacer silencio',
+    'Decí algo que tenga botones',
+    'Decí algo que se abra con una llave',
+    'Decí una cosa que se mueva con el viento',
+    'Decí un objeto que se use en el baño',
+    'Decí algo que se pueda apilar',
+    'Decí una cosa que se use para limpiar',
+    'Decí algo que cambie de color',
+    'Decí un objeto que tenga tapa',
+    'Decí algo que se pueda reciclar',
+    'Decí un animal que salte',
+    'Decí algo que aparezca en un mapa',
+    'Decí un personaje de un cuento',
+    'Decí una cosa que se pueda usar como señal',
+    'Decí algo que funcione con pilas'
   ]
 };
 
 const labels={phrase:'Completá la frase',everyday:'Vida cotidiana',association:'Asociaciones'};
 const instructions={phrase:'Completen el espacio con la misma palabra.',everyday:'Respondan con una palabra o un nombre.',association:'Digan lo primero que se les venga a la cabeza.'};
+// Append new prompts to each deck so saved card IDs keep their meaning.
 const cards=Object.entries(decks).flatMap(([type,prompts])=>prompts.map((prompt,index)=>({id:`${type}-${index}`,type,prompt})));
 const $=id=>document.getElementById(id);
 const key='en-la-misma-v2';
@@ -74,7 +165,13 @@ function render(){
   $('result').textContent=state.lastMatch?`Un punto para ${state.teams[state.turn].name}.`:'Esta vez no hubo coincidencia.';
 }
 function revealTeam(){const strip=$('scoreboard'),tile=$(`team-${state.turn}`);if(tile){const left=tile.offsetLeft-strip.offsetLeft;strip.scrollLeft=Math.max(0,left-(strip.clientWidth-tile.offsetWidth)/2)}}
-function draw(){const available=pool().filter(c=>!state.used.includes(c.id));if(!available.length){state.current=null;state.phase='finished'}else{const c=available[Math.floor(Math.random()*available.length)];state.current=c.id;state.used.push(c.id);state.phase='ready'}save();render();revealTeam()}
+// Rejection sampling keeps every remaining card equally likely.
+function randomIndex(length){
+  const range=2**32,limit=range-range%length,value=new Uint32Array(1);
+  do{crypto.getRandomValues(value)}while(value[0]>=limit);
+  return value[0]%length;
+}
+function draw(){const available=pool().filter(c=>!state.used.includes(c.id));if(!available.length){state.current=null;state.phase='finished'}else{const c=available[randomIndex(available.length)];state.current=c.id;state.used.push(c.id);state.phase='ready'}save();render();revealTeam()}
 function focusMain(){(state.phase==='finished'?$('reshuffle'):$('count-start')).focus({preventScroll:true})}
 function answer(){state.phase='answer';save();render();announce('Ahora: respondan todos al mismo tiempo.')}
 $('count-start').addEventListener('click',()=>{if(state.phase!=='ready')return;state.phase='counting';let n=3;$('countdown').textContent=n;save();render();announce('Tres');timer=setInterval(()=>{n--;if(n>0){$('countdown').textContent=n;announce(n===2?'Dos':'Uno')}else{clearInterval(timer);timer=null;answer()}},1000)});
